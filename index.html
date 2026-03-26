@@ -147,7 +147,7 @@
       </div>
     </section>
 
-    <!-- ─── CONTROL TOWER DEMO ──────────────────────── -->
+    <!-- ─── CONTROL TOWER SHOWCASE ────────────────── -->
     <section class="section" id="demo">
       <div class="container">
         <h2>See the Control Tower in Action</h2>
@@ -156,18 +156,172 @@
           guided setup wizard through dual-track development, FDA communications
           automation, and team collaboration.
         </p>
-        <div class="demo-frame">
-          <iframe
-            src="https://control-tower-demo.pages.dev"
-            title="Control Tower Demo"
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin"
-          ></iframe>
+
+        <!-- Hero Features (video candidates) -->
+        <div class="showcase-hero-grid">
+          <div class="showcase-hero-card">
+            <img
+              src="screenshots/dual-track.png"
+              alt="Dual-Track Dashboard"
+              loading="lazy"
+            />
+            <div class="showcase-hero-label">
+              <h3>Dual-Track Dashboard</h3>
+              <p>
+                Technical and regulatory milestones tracked side by side —
+                always know where both tracks stand.
+              </p>
+            </div>
+          </div>
+          <div class="showcase-hero-card">
+            <img
+              src="screenshots/document-control.png"
+              alt="Document Control"
+              loading="lazy"
+            />
+            <div class="showcase-hero-label">
+              <h3>Document Control</h3>
+              <p>
+                ISO 13485-aligned lifecycle tracking with version history,
+                review scheduling, and audit traceability.
+              </p>
+            </div>
+          </div>
+          <div class="showcase-hero-card">
+            <img
+              src="screenshots/message-board.png"
+              alt="Message Board"
+              loading="lazy"
+            />
+            <div class="showcase-hero-label">
+              <h3>Message Board</h3>
+              <p>
+                Purpose-driven messaging — every thread tracks a decision,
+                action, or status update tied to project execution.
+              </p>
+            </div>
+          </div>
         </div>
-        <p class="demo-note">
-          This is a live demo — explore the tabs to see how we manage medical
-          device projects.
-        </p>
+
+        <!-- All Tabs Thumbnail Grid -->
+        <h3 class="showcase-grid-title">
+          All 15 Tabs — Complete Project Visibility
+        </h3>
+        <div class="showcase-thumb-grid">
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/dual-track.png"
+              alt="Dual-Track"
+              loading="lazy"
+            /><span>Dual-Track</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/gate-system.png"
+              alt="Gate System"
+              loading="lazy"
+            /><span>Gate System</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/regulatory-tracker.png"
+              alt="Regulatory"
+              loading="lazy"
+            /><span>Regulatory Tracker</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/risk-dashboard.png"
+              alt="Risks"
+              loading="lazy"
+            /><span>Risk Dashboard</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/audit-trail.png"
+              alt="Audit"
+              loading="lazy"
+            /><span>Audit Trail</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/document-control.png"
+              alt="Documents"
+              loading="lazy"
+            /><span>Document Control</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/actions.png"
+              alt="Actions"
+              loading="lazy"
+            /><span>Actions</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/timeline.png"
+              alt="Timeline"
+              loading="lazy"
+            /><span>Timeline</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/budget.png"
+              alt="Budget"
+              loading="lazy"
+            /><span>Budget</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/cash-runway.png"
+              alt="Cash/Runway"
+              loading="lazy"
+            /><span>Cash / Runway</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/us-investment.png"
+              alt="US Investment"
+              loading="lazy"
+            /><span>US Investment</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/resources.png"
+              alt="Resources"
+              loading="lazy"
+            /><span>Resources</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/suppliers.png"
+              alt="Suppliers"
+              loading="lazy"
+            /><span>Suppliers</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/message-board.png"
+              alt="Messages"
+              loading="lazy"
+            /><span>Message Board</span>
+          </div>
+          <div class="showcase-thumb">
+            <img
+              src="screenshots/fda-comms.png"
+              alt="FDA Comms"
+              loading="lazy"
+            /><span>FDA Comms</span>
+          </div>
+        </div>
+
+        <!-- Lightbox (click to enlarge) -->
+        <div class="showcase-lightbox" id="showcaseLightbox">
+          <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+            &times;
+          </button>
+          <img id="lightboxImg" src="" alt="" />
+        </div>
       </div>
     </section>
 
@@ -347,6 +501,30 @@
         .addEventListener("click", function () {
           document.querySelector(".nav-links").classList.toggle("nav-open");
         });
+
+      // Lightbox for screenshot thumbnails
+      (function () {
+        var lb = document.getElementById("showcaseLightbox");
+        var lbImg = document.getElementById("lightboxImg");
+        document
+          .querySelectorAll(".showcase-thumb img, .showcase-hero-card img")
+          .forEach(function (img) {
+            img.style.cursor = "pointer";
+            img.addEventListener("click", function () {
+              lbImg.src = this.src;
+              lbImg.alt = this.alt;
+              lb.classList.add("active");
+            });
+          });
+        document
+          .getElementById("lightboxClose")
+          .addEventListener("click", function () {
+            lb.classList.remove("active");
+          });
+        lb.addEventListener("click", function (e) {
+          if (e.target === lb) lb.classList.remove("active");
+        });
+      })();
     </script>
   </body>
 </html>

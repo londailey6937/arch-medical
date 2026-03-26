@@ -335,6 +335,125 @@ h3 {
   font-size: 0.85rem;
 }
 
+/* ─── SHOWCASE ──────────────────────────────── */
+.showcase-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  margin: 28px 0 40px;
+}
+.showcase-hero-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.showcase-hero-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+.showcase-hero-card img {
+  width: 100%;
+  display: block;
+}
+.showcase-hero-label {
+  padding: 18px 22px;
+}
+.showcase-hero-label h3 {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 1.15rem;
+}
+.showcase-hero-label p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.showcase-grid-title {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin: 36px 0 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.showcase-thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.showcase-thumb {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  text-align: center;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+.showcase-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.showcase-thumb img {
+  width: 100%;
+  display: block;
+}
+.showcase-thumb span {
+  display: block;
+  padding: 6px 4px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Lightbox */
+.showcase-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.88);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.showcase-lightbox.active {
+  display: flex;
+}
+.showcase-lightbox img {
+  max-width: 95vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.4rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .showcase-thumb-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /* ─── RESOURCES ─────────────────────────────── */
 .resource-card {
   background: var(--surface);
