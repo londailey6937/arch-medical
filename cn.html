@@ -145,25 +145,31 @@
           我们的15个标签仪表盘管理FDA之旅的每一个方面——从引导式设置向导到双轨道开发、FDA通信自动化和团队协作。
         </p>
 
-        <!-- Hero Features -->
+        <!-- Hero Features (animated showcase) -->
         <div class="showcase-hero-grid">
           <div class="showcase-hero-card">
-            <img
-              src="screenshots/dual-track.png"
-              alt="双轨道仪表盘"
-              loading="lazy"
-            />
+            <div class="img-wrap">
+              <span class="showcase-live-badge"><span class="showcase-live-dot"></span> 实时预览</span>
+              <img
+                src="screenshots/dual-track.png"
+                alt="双轨道仪表盘"
+                loading="lazy"
+              />
+            </div>
             <div class="showcase-hero-label">
               <h3>双轨道仪表盘</h3>
               <p>技术和法规里程碑并排跟踪——随时了解两条轨道的进展状态。</p>
             </div>
           </div>
           <div class="showcase-hero-card">
-            <img
-              src="screenshots/document-control.png"
-              alt="文档控制"
-              loading="lazy"
-            />
+            <div class="img-wrap">
+              <span class="showcase-live-badge"><span class="showcase-live-dot"></span> 实时预览</span>
+              <img
+                src="screenshots/document-control.png"
+                alt="文档控制"
+                loading="lazy"
+              />
+            </div>
             <div class="showcase-hero-label">
               <h3>文档控制</h3>
               <p>
@@ -172,11 +178,14 @@
             </div>
           </div>
           <div class="showcase-hero-card">
-            <img
-              src="screenshots/message-board.png"
-              alt="消息中心"
-              loading="lazy"
-            />
+            <div class="img-wrap">
+              <span class="showcase-live-badge"><span class="showcase-live-dot"></span> 实时预览</span>
+              <img
+                src="screenshots/message-board.png"
+                alt="消息中心"
+                loading="lazy"
+              />
+            </div>
             <div class="showcase-hero-label">
               <h3>消息中心</h3>
               <p>
@@ -458,6 +467,19 @@
         .addEventListener("click", function () {
           document.querySelector(".nav-links").classList.toggle("nav-open");
         });
+
+      // Scroll-reveal animation for hero cards
+      (function () {
+        var cards = document.querySelectorAll('.showcase-hero-card');
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+            }
+          });
+        }, { threshold: 0.15 });
+        cards.forEach(function (card) { observer.observe(card); });
+      })();
 
       // Lightbox for screenshot thumbnails
       (function () {

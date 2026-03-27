@@ -350,14 +350,97 @@ h3 {
   transition:
     transform 0.2s,
     box-shadow 0.2s;
+  position: relative;
 }
 .showcase-hero-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
+.showcase-hero-card .img-wrap {
+  overflow: hidden;
+  position: relative;
+}
 .showcase-hero-card img {
   width: 100%;
   display: block;
+  transform-origin: center center;
+}
+
+/* Ken Burns animations — each card pans differently */
+.showcase-hero-card:nth-child(1) img {
+  animation: kenburns-1 18s ease-in-out infinite alternate;
+}
+.showcase-hero-card:nth-child(2) img {
+  animation: kenburns-2 20s ease-in-out infinite alternate;
+}
+.showcase-hero-card:nth-child(3) img {
+  animation: kenburns-3 16s ease-in-out infinite alternate;
+}
+
+@keyframes kenburns-1 {
+  0%   { transform: scale(1)    translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1.5%, -1%); }
+}
+@keyframes kenburns-2 {
+  0%   { transform: scale(1.06) translate(-1%, 0.5%); }
+  100% { transform: scale(1)    translate(1%, -0.5%); }
+}
+@keyframes kenburns-3 {
+  0%   { transform: scale(1)    translate(0.5%, 0); }
+  100% { transform: scale(1.07) translate(-0.5%, -1.5%); }
+}
+
+/* Pause Ken Burns on hover so lightbox click is steady */
+.showcase-hero-card:hover img {
+  animation-play-state: paused;
+}
+
+/* "Live Preview" badge */
+.showcase-live-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(30, 64, 175, 0.85);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.showcase-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* Scroll-reveal entrance */
+.showcase-hero-card {
+  opacity: 0;
+  transform: translateY(32px);
+}
+.showcase-hero-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.showcase-hero-card:nth-child(2).revealed {
+  transition-delay: 0.15s;
+}
+.showcase-hero-card:nth-child(3).revealed {
+  transition-delay: 0.3s;
 }
 .showcase-hero-label {
   padding: 18px 22px;
