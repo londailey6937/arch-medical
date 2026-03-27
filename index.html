@@ -335,7 +335,28 @@
           </div>
         </div>
 
-        <!-- Lightbox (click to enlarge) -->
+        <!-- Card Popup Modal -->
+        <div class="card-modal-overlay" id="cardModal">
+          <div class="card-modal">
+            <div class="card-modal-header">
+              <h3 id="cardModalTitle"></h3>
+              <button
+                class="card-modal-close"
+                id="cardModalClose"
+                aria-label="Close"
+              >
+                &times;
+              </button>
+            </div>
+            <img class="card-modal-img" id="cardModalImg" src="" alt="" />
+            <div class="card-modal-body">
+              <p class="card-modal-desc" id="cardModalDesc"></p>
+              <div class="card-modal-features" id="cardModalFeatures"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lightbox (click to enlarge thumbnails) -->
         <div class="showcase-lightbox" id="showcaseLightbox">
           <button class="lightbox-close" id="lightboxClose" aria-label="Close">
             &times;
@@ -545,12 +566,181 @@
         });
       })();
 
-      // Lightbox for screenshot thumbnails
+      // Card popup data for the 3 hero cards
+      var cardPopupData = [
+        {
+          title: "Dual-Track Dashboard",
+          desc: "Technical and regulatory milestones tracked side by side. Your team sees exactly where both tracks stand — and what's blocking FDA clearance.",
+          features: [
+            {
+              icon: "🔬",
+              name: "Technical Track",
+              detail: "Engineering milestones, V&V testing, design controls",
+            },
+            {
+              icon: "📋",
+              name: "Regulatory Track",
+              detail:
+                "510(k) submission steps, FDA interactions, compliance gates",
+            },
+            {
+              icon: "🚦",
+              name: "Status at a Glance",
+              detail: "Red / yellow / green indicators across every milestone",
+            },
+            {
+              icon: "📊",
+              name: "Risk Visibility",
+              detail:
+                "Open risks surfaced with severity, owner, and mitigation",
+            },
+            {
+              icon: "🎯",
+              name: "Gate Reviews",
+              detail: "Phase-gate checkpoints with go/no-go criteria",
+            },
+            {
+              icon: "⏱️",
+              name: "Timeline Tracking",
+              detail: "Days to next milestone, runway, and critical path view",
+            },
+          ],
+        },
+        {
+          title: "Document Control",
+          desc: "ISO 13485-aligned document lifecycle management. Every revision, review cycle, and approval is tracked with full audit traceability.",
+          features: [
+            {
+              icon: "📁",
+              name: "Design History File",
+              detail:
+                "Structured DHF with auto-linked design inputs, outputs, verification",
+            },
+            {
+              icon: "🔄",
+              name: "Version History",
+              detail:
+                "Full revision chain with author, date, and change summary",
+            },
+            {
+              icon: "✅",
+              name: "Review & Approval",
+              detail: "Scheduled review cycles with sign-off tracking",
+            },
+            {
+              icon: "🔍",
+              name: "Audit Trail",
+              detail:
+                "Immutable record of every document action for FDA inspection readiness",
+            },
+            {
+              icon: "📎",
+              name: "Standards Mapping",
+              detail:
+                "Link documents to IEC 62304, ISO 14971, and consensus standards",
+            },
+            {
+              icon: "📤",
+              name: "Export Ready",
+              detail: "One-click export for 510(k) submission packages",
+            },
+          ],
+        },
+        {
+          title: "Message Board",
+          desc: "Purpose-driven messaging where every thread tracks a decision, action, or status update — tied directly to project execution.",
+          features: [
+            {
+              icon: "💬",
+              name: "Threaded Discussions",
+              detail:
+                "Organized conversations by topic, phase, or regulatory question",
+            },
+            {
+              icon: "📌",
+              name: "Decision Tracking",
+              detail: "Pin key decisions with rationale and responsible party",
+            },
+            {
+              icon: "🌐",
+              name: "Bilingual Support",
+              detail: "EN/中文 interface for cross-border team collaboration",
+            },
+            {
+              icon: "🔔",
+              name: "Smart Notifications",
+              detail:
+                "Alerts for mentions, due dates, and unresolved action items",
+            },
+            {
+              icon: "🔗",
+              name: "Context Links",
+              detail: "Attach messages to milestones, documents, or risk items",
+            },
+            {
+              icon: "📋",
+              name: "Action Items",
+              detail:
+                "Convert any message to a tracked action with owner and deadline",
+            },
+          ],
+        },
+      ];
+
+      // Wire card popups
+      (function () {
+        var modal = document.getElementById("cardModal");
+        var modalTitle = document.getElementById("cardModalTitle");
+        var modalImg = document.getElementById("cardModalImg");
+        var modalDesc = document.getElementById("cardModalDesc");
+        var modalFeatures = document.getElementById("cardModalFeatures");
+
+        document
+          .querySelectorAll(".showcase-hero-card")
+          .forEach(function (card, i) {
+            card.addEventListener("click", function () {
+              var data = cardPopupData[i];
+              if (!data) return;
+              modalTitle.textContent = data.title;
+              modalImg.src = card.querySelector("img").src;
+              modalImg.alt = data.title;
+              modalDesc.textContent = data.desc;
+              modalFeatures.innerHTML = data.features
+                .map(function (f) {
+                  return (
+                    '<div class="card-modal-feature">' +
+                    '<span class="card-modal-feature-icon">' +
+                    f.icon +
+                    "</span>" +
+                    '<div class="card-modal-feature-text"><strong>' +
+                    f.name +
+                    "</strong>" +
+                    "<span>" +
+                    f.detail +
+                    "</span></div></div>"
+                  );
+                })
+                .join("");
+              modal.classList.add("active");
+            });
+          });
+
+        document
+          .getElementById("cardModalClose")
+          .addEventListener("click", function () {
+            modal.classList.remove("active");
+          });
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) modal.classList.remove("active");
+        });
+      })();
+
+      // Lightbox for screenshot thumbnails (bottom grid only)
       (function () {
         var lb = document.getElementById("showcaseLightbox");
         var lbImg = document.getElementById("lightboxImg");
         document
-          .querySelectorAll(".showcase-thumb img, .showcase-hero-card img")
+          .querySelectorAll(".showcase-thumb img")
           .forEach(function (img) {
             img.style.cursor = "pointer";
             img.addEventListener("click", function () {

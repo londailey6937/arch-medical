@@ -363,48 +363,9 @@ h3 {
 .showcase-hero-card img {
   width: 100%;
   display: block;
-  transform-origin: center center;
 }
-
-/* Ken Burns animations — each card pans differently */
-.showcase-hero-card:nth-child(1) img {
-  animation: kenburns-1 10s ease-in-out infinite alternate;
-}
-.showcase-hero-card:nth-child(2) img {
-  animation: kenburns-2 12s ease-in-out infinite alternate;
-}
-.showcase-hero-card:nth-child(3) img {
-  animation: kenburns-3 9s ease-in-out infinite alternate;
-}
-
-@keyframes kenburns-1 {
-  0% {
-    transform: scale(1) translate(0, 0);
-  }
-  100% {
-    transform: scale(1.18) translate(-3%, -2%);
-  }
-}
-@keyframes kenburns-2 {
-  0% {
-    transform: scale(1.15) translate(-2%, 1.5%);
-  }
-  100% {
-    transform: scale(1) translate(2%, -1.5%);
-  }
-}
-@keyframes kenburns-3 {
-  0% {
-    transform: scale(1) translate(1%, 0);
-  }
-  100% {
-    transform: scale(1.16) translate(-2%, -3%);
-  }
-}
-
-/* Pause Ken Burns on hover so lightbox click is steady */
-.showcase-hero-card:hover img {
-  animation-play-state: paused;
+.showcase-hero-card {
+  cursor: pointer;
 }
 
 /* "Live Preview" badge */
@@ -709,5 +670,121 @@ h3 {
   }
   .hero {
     padding: 120px 24px 72px;
+  }
+}
+
+/* ─── CARD POPUP MODAL ──────────────────────── */
+.card-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.card-modal-overlay.active {
+  display: flex;
+}
+.card-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  max-width: 960px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+  animation: modal-enter 0.35s ease-out;
+}
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.card-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.card-modal-header h3 {
+  font-size: 1.3rem;
+  color: var(--accent);
+  margin: 0;
+}
+.card-modal-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+.card-modal-close:hover {
+  color: var(--text);
+}
+.card-modal-img {
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid var(--border);
+}
+.card-modal-body {
+  padding: 24px;
+}
+.card-modal-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.card-modal-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.card-modal-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-alt);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.card-modal-feature-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.card-modal-feature-text {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+.card-modal-feature-text strong {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--text);
+}
+.card-modal-feature-text span {
+  color: var(--text-muted);
+}
+@media (max-width: 768px) {
+  .card-modal-features {
+    grid-template-columns: 1fr;
+  }
+  .card-modal {
+    max-height: 95vh;
   }
 }
