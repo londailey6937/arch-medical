@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.w3.org/2000/svg"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://510kbridge.com/</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://510kbridge.com/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://510kbridge.com/cn.html"/>
+  </url>
+  <url>
+    <loc>https://510kbridge.com/cn.html</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://510kbridge.com/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://510kbridge.com/cn.html"/>
+  </url>
+</urlset>

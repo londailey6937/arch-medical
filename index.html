@@ -10,6 +10,36 @@
       name="description"
       content="510k Bridge helps Chinese medical device entrepreneurs navigate the FDA 510(k) pathway with expert project management, regulatory strategy, and our proprietary Control Tower dashboard."
     />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta
+      property="og:title"
+      content="510k Bridge — FDA Pathway for Chinese Medical Device Companies"
+    />
+    <meta
+      property="og:description"
+      content="Expert project management for Chinese medical device companies navigating the FDA 510(k) pathway. Bilingual team, Control Tower platform, regulatory strategy."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://510kbridge.com/" />
+    <meta
+      property="og:image"
+      content="https://510kbridge.com/screenshots/dual-track.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://510kbridge.com/" />
+    <!-- GA4 -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
     <link rel="stylesheet" href="assets/style.css" />
   </head>
   <body>
@@ -103,7 +133,41 @@
         </div>
       </div>
     </section>
-
+    <!-- ─── HOW IT WORKS ─────────────────────────────── -->
+    <section class="section section-alt" id="how-it-works">
+      <div class="container">
+        <h2>How It Works</h2>
+        <p class="section-sub">Three steps from first call to FDA clearance</p>
+        <div class="steps-row">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h3>Schedule a Call</h3>
+            <p>
+              Free 30-minute consultation to assess your device, predicate
+              strategy, and timeline.
+            </p>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <h3>Launch Control Tower</h3>
+            <p>
+              We set up your bilingual dashboard, map milestones, and kick off
+              the dual-track plan.
+            </p>
+          </div>
+          <div class="step-arrow">→</div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <h3>Submit & Clear 510(k)</h3>
+            <p>
+              We manage every gate, document, and FDA interaction through to
+              clearance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- ─── SERVICES / TIERS ────────────────────────── -->
     <section class="section section-alt" id="services">
       <div class="container">
@@ -411,6 +475,47 @@
       </div>
     </section>
 
+    <!-- ─── TESTIMONIALS ─────────────────────────────── -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <h2>Trusted by Medical Device Teams</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "The Control Tower dashboard gave us complete visibility into our
+              510(k) timeline. We always knew exactly where we stood with FDA."
+            </p>
+            <div class="testimonial-author">
+              <strong>Medical Device Startup CEO</strong>
+              <span>Class II Respiratory Device</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "Having a bilingual PMP who understood both our Chinese R&D team
+              and US regulatory requirements was the difference between success
+              and failure."
+            </p>
+            <div class="testimonial-author">
+              <strong>VP of Regulatory Affairs</strong>
+              <span>Cardiovascular Device Company</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "The 510(k) Bridge strategy helped us secure seed funding at the
+              right time — right after our Pre-Sub meeting when investor
+              confidence was highest."
+            </p>
+            <div class="testimonial-author">
+              <strong>Co-Founder & CTO</strong>
+              <span>Digital Health Startup</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ─── FREE RESOURCES ──────────────────────────── -->
     <section class="section section-alt" id="resources">
       <div class="container">
@@ -534,7 +639,12 @@
             <div class="contact-item">
               <strong>WeChat</strong>
               <p>Scan to connect →</p>
-              <div class="wechat-qr">[WeChat QR Code]</div>
+              <div class="wechat-qr">
+                WeChat ID: <strong>arch-medical</strong><br /><span
+                  style="font-size: 0.8rem; color: var(--text-muted)"
+                  >Add us on WeChat for quick response</span
+                >
+              </div>
             </div>
             <div class="contact-item">
               <strong>Location</strong>
@@ -551,14 +661,42 @@
     <footer class="footer">
       <div class="container">
         <div class="footer-inner">
+          <div class="footer-brand">
+            <p><strong>510k Bridge</strong></p>
+            <p>Pilot Software LLC dba 510k Bridge</p>
+            <p>Oregon, USA</p>
+          </div>
+          <div class="footer-col">
+            <p class="footer-heading">Quick Links</p>
+            <a href="#services">Services</a>
+            <a href="#demo">Control Tower</a>
+            <a href="#resources">Free Resources</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div class="footer-col">
+            <p class="footer-heading">Resources</p>
+            <a href="downloads/510k_Pathway_Guide_EN.pdf" download
+              >510(k) Guide (EN)</a
+            >
+            <a href="downloads/510k_Pathway_Guide_CN.pdf" download
+              >510(k) Guide (中文)</a
+            >
+            <a href="downloads/Investment_Fundraising_Guide_EN.pdf" download
+              >Investment Guide</a
+            >
+            <a href="downloads/510k_Bridge_Factsheet_EN.pdf" download
+              >Fact Sheet</a
+            >
+          </div>
+          <div class="footer-col">
+            <p class="footer-heading">Language</p>
+            <a href="cn.html">中文版</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
           <p>
             &copy; 2026 Pilot Software LLC dba 510k Bridge. All rights reserved.
           </p>
-          <div class="footer-links">
-            <a href="cn.html">中文版</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-          </div>
         </div>
       </div>
     </footer>
