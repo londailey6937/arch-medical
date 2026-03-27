@@ -149,7 +149,9 @@
         <div class="showcase-hero-grid">
           <div class="showcase-hero-card">
             <div class="img-wrap">
-              <span class="showcase-live-badge"><span class="showcase-live-dot"></span> 实时预览</span>
+              <span class="showcase-live-badge"
+                ><span class="showcase-live-dot"></span> 实时预览</span
+              >
               <img
                 src="screenshots/dual-track.png"
                 alt="双轨道仪表盘"
@@ -163,7 +165,9 @@
           </div>
           <div class="showcase-hero-card">
             <div class="img-wrap">
-              <span class="showcase-live-badge"><span class="showcase-live-dot"></span> 实时预览</span>
+              <span class="showcase-live-badge"
+                ><span class="showcase-live-dot"></span> 实时预览</span
+              >
               <img
                 src="screenshots/document-control.png"
                 alt="文档控制"
@@ -179,7 +183,9 @@
           </div>
           <div class="showcase-hero-card">
             <div class="img-wrap">
-              <span class="showcase-live-badge"><span class="showcase-live-dot"></span> 实时预览</span>
+              <span class="showcase-live-badge"
+                ><span class="showcase-live-dot"></span> 实时预览</span
+              >
               <img
                 src="screenshots/message-board.png"
                 alt="消息中心"
@@ -470,15 +476,20 @@
 
       // Scroll-reveal animation for hero cards
       (function () {
-        var cards = document.querySelectorAll('.showcase-hero-card');
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('revealed');
-            }
-          });
-        }, { threshold: 0.15 });
-        cards.forEach(function (card) { observer.observe(card); });
+        var cards = document.querySelectorAll(".showcase-hero-card");
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("revealed");
+              }
+            });
+          },
+          { threshold: 0.15 },
+        );
+        cards.forEach(function (card) {
+          observer.observe(card);
+        });
       })();
 
       // Lightbox for screenshot thumbnails

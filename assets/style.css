@@ -368,26 +368,38 @@ h3 {
 
 /* Ken Burns animations — each card pans differently */
 .showcase-hero-card:nth-child(1) img {
-  animation: kenburns-1 18s ease-in-out infinite alternate;
+  animation: kenburns-1 10s ease-in-out infinite alternate;
 }
 .showcase-hero-card:nth-child(2) img {
-  animation: kenburns-2 20s ease-in-out infinite alternate;
+  animation: kenburns-2 12s ease-in-out infinite alternate;
 }
 .showcase-hero-card:nth-child(3) img {
-  animation: kenburns-3 16s ease-in-out infinite alternate;
+  animation: kenburns-3 9s ease-in-out infinite alternate;
 }
 
 @keyframes kenburns-1 {
-  0%   { transform: scale(1)    translate(0, 0); }
-  100% { transform: scale(1.08) translate(-1.5%, -1%); }
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.18) translate(-3%, -2%);
+  }
 }
 @keyframes kenburns-2 {
-  0%   { transform: scale(1.06) translate(-1%, 0.5%); }
-  100% { transform: scale(1)    translate(1%, -0.5%); }
+  0% {
+    transform: scale(1.15) translate(-2%, 1.5%);
+  }
+  100% {
+    transform: scale(1) translate(2%, -1.5%);
+  }
 }
 @keyframes kenburns-3 {
-  0%   { transform: scale(1)    translate(0.5%, 0); }
-  100% { transform: scale(1.07) translate(-0.5%, -1.5%); }
+  0% {
+    transform: scale(1) translate(1%, 0);
+  }
+  100% {
+    transform: scale(1.16) translate(-2%, -3%);
+  }
 }
 
 /* Pause Ken Burns on hover so lightbox click is steady */
@@ -422,8 +434,15 @@ h3 {
   animation: pulse-dot 1.8s ease-in-out infinite;
 }
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%      { opacity: 0.4; transform: scale(0.7); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
 }
 
 /* Scroll-reveal entrance */
@@ -434,7 +453,9 @@ h3 {
 .showcase-hero-card.revealed {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
 }
 .showcase-hero-card:nth-child(2).revealed {
   transition-delay: 0.15s;
