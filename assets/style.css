@@ -712,6 +712,62 @@ h3 {
   color: var(--text-muted);
 }
 
+/* ─── OUR TEAM ──────────────────────────────── */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 32px;
+}
+.team-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px 28px;
+  text-align: center;
+}
+.team-photo-placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  letter-spacing: 0.05em;
+}
+.team-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+.team-cn-name {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.team-title {
+  font-size: 0.95rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.team-role {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  letter-spacing: 0.03em;
+}
+.team-bio {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  text-align: left;
+}
+
 /* ─── IMPROVED FOOTER ───────────────────────── */
 .footer-brand p {
   margin: 2px 0;
