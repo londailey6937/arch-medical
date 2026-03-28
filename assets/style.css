@@ -745,9 +745,9 @@ h3 {
   margin-bottom: 4px;
 }
 .team-cn-name {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
-  font-weight: 400;
+  margin-bottom: 4px;
 }
 .team-title {
   font-size: 0.95rem;
