@@ -342,6 +342,11 @@ h3 {
   gap: 28px;
   margin: 28px 0 40px;
 }
+@media (min-width: 900px) {
+  .showcase-hero-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 .showcase-hero-card {
   border-radius: var(--radius);
   overflow: hidden;
@@ -410,18 +415,18 @@ h3 {
 .showcase-hero-card {
   opacity: 0;
   transform: translateY(32px);
-}
-.showcase-hero-card.revealed {
-  opacity: 1;
-  transform: translateY(0);
   transition:
     opacity 0.7s ease-out,
     transform 0.7s ease-out;
 }
-.showcase-hero-card:nth-child(2).revealed {
+.showcase-hero-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.showcase-hero-card:nth-child(2) {
   transition-delay: 0.15s;
 }
-.showcase-hero-card:nth-child(3).revealed {
+.showcase-hero-card:nth-child(3) {
   transition-delay: 0.3s;
 }
 .showcase-hero-label {
