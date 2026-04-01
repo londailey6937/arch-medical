@@ -1,0 +1,3 @@
+# Redirect pages.dev to custom domain
+https://arch-medical.pages.dev/* https://510kbridge.com/:splat 301
+https://*.arch-medical.pages.dev/* https://510kbridge.com/:splat 301
