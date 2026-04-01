@@ -8,6 +8,7 @@ export default defineConfig({
       input: {
         main: "index.html",
         cn: "cn.html",
+        ko: "ko.html",
       },
     },
   },
