@@ -143,7 +143,7 @@ add_text_box(slide, Inches(1), Inches(2.6), Inches(11), Inches(0.8),
              "The First Purpose-Built FDA 510(k) Project Management Platform",
              font_size=22, color=TEAL, bold=False, alignment=PP_ALIGN.CENTER)
 add_text_box(slide, Inches(2), Inches(3.8), Inches(9), Inches(1.5),
-             "16 integrated tabs  •  Trilingual (EN / 中文 / 한국어)  •  Role-based access\n"
+             "18 integrated tabs  •  Trilingual (EN / 中文 / 한국어)  •  Role-based access\n"
              "21 CFR Part 11 audit trail  •  ISO 14971 risk management  •  FDA Q-Sub automation\n"
              "Real-time cloud sync  •  7 pre-configured device templates  •  3 subscription tiers",
              font_size=16, color=WHITE, alignment=PP_ALIGN.CENTER)
@@ -197,14 +197,15 @@ slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(slide, WHITE)
 add_shape_bg(slide, Inches(0), Inches(0), W, Inches(1.1), NAVY)
 add_text_box(slide, Inches(0.6), Inches(0.3), Inches(10), Inches(0.6),
-             "Platform Architecture: 16 Integrated Tabs in 5 Groups",
+             "Platform Architecture: 18 Integrated Tabs in 5 Groups",
              font_size=28, color=WHITE, bold=True)
 
 groups = [
     ("PROGRAM MGMT", TEAL, ["1. Dual-Track Milestones", "2. Gate System",
                              "3. Timeline", "4. Actions Panel"]),
     ("REGULATORY", RGBColor(0xE6, 0x5C, 0x00), ["5. Regulatory Tracker",
-                  "6. Risk Dashboard", "7. FDA Comms Center"]),
+                  "6. Risk Dashboard", "7. FDA Comms Center",
+                  "17. Predicate Finder", "18. Guidance Docs"]),
     ("DOCUMENTS", ACCENT, ["8. Document Control", "9. Audit Trail"]),
     ("FINANCE", RGBColor(0x7B, 0x1F, 0xA2), ["10. Budget", "11. Cash / Runway",
                "12. US Investment", "13. Cap Table"]),
@@ -469,6 +470,34 @@ tab_data = [
      "timestamps, and the ability to spawn action items — "
      "then exports Pre-Sub questions directly to the FDA Communications Center."
     ),
+
+    (17, "Predicate Finder", "REGULATORY", None, [
+        "▸ Standalone SaaS tool powered by openFDA — search 200K+ cleared 510(k) devices",
+        "▸ Search by product code, applicant, device name, or K-number",
+        "▸ Real-time FDA database queries — always current data, no stale exports",
+        "▸ One-click predicate selection — feeds directly into your 510(k) project",
+        "▸ Decision number, clearance date, product code, and statement links for every result",
+        "▸ Free tier access — available even without a Control Tower subscription",
+    ],
+     "Regulatory teams currently search FDA's 510(k) database manually via clunky FDA.gov search. "
+     "No competitor integrates predicate device search directly into the 510(k) workflow. "
+     "Control Tower's Predicate Finder automates the most critical first step in a 510(k) — "
+     "identifying your predicate device — and links it directly into your project."
+    ),
+
+    (18, "FDA Guidance Document Search", "REGULATORY", None, [
+        "▸ Searchable database of FDA guidance documents relevant to 510(k) submissions",
+        "▸ Filter by device type, topic area, publication date, and draft/final status",
+        "▸ Quick-reference summaries — understand guidance applicability without reading 100-page PDFs",
+        "▸ Links to official FDA.gov source documents for citation in submissions",
+        "▸ Guidance bookmarks — save frequently referenced documents for easy access",
+        "▸ Auto-suggestions based on your device template and applicable standards",
+    ],
+     "Regulatory professionals spend hours searching FDA.gov for relevant guidance documents. "
+     "No competitor platform indexes or surfaces FDA guidance within the project context. "
+     "Control Tower puts guidance discovery inside the workflow where it's needed — "
+     "eliminating the tab-switching and manual searching that slows regulatory strategy."
+    ),
 ]
 
 for tab_num, tab_name, group, screenshot_key, value_props, competitor_gap in tab_data:
@@ -503,7 +532,143 @@ for tab_num, tab_name, group, screenshot_key, value_props, competitor_gap in tab
 
 
 # ═══════════════════════════════════════════════════════════════════════
-# SLIDE 20 — DEVICE TEMPLATES & WIZARD
+# CROSS-CUTTING FEATURE SLIDES
+# ═══════════════════════════════════════════════════════════════════════
+
+# ── Stakeholder Inputs & Change Requests ──
+slide = prs.slides.add_slide(prs.slide_layouts[6])
+add_bg(slide, WHITE)
+add_shape_bg(slide, Inches(0), Inches(0), W, Inches(1.1), NAVY)
+add_text_box(slide, Inches(0.6), Inches(0.15), Inches(8), Inches(0.5),
+             "CROSS-CUTTING FEATURES",
+             font_size=13, color=TEAL, bold=True)
+add_text_box(slide, Inches(0.6), Inches(0.45), Inches(10), Inches(0.55),
+             "Stakeholder Inputs & Change Requests",
+             font_size=26, color=WHITE, bold=True)
+add_text_box(slide, Inches(10.5), Inches(0.3), Inches(2.5), Inches(0.5),
+             "510(k) Bridge", font_size=16, color=TEAL, bold=True,
+             alignment=PP_ALIGN.RIGHT)
+
+add_bullet_frame(slide, Inches(0.8), Inches(1.3), Inches(5.8), Inches(3.5), [
+    "▸ Floating 📥 button on every Gate System page — opens a side panel",
+    "▸ Tech & Business stakeholders submit structured input per gate",
+    "▸ Fields: gate selection, input type (Technical/Business/Risk/Resource/Other), free-text notes",
+    "▸ PMP sees all submissions in the gate detail view — organized by contributor",
+    "▸ Inputs feed directly into gate decisions — no more hunting through email/Slack",
+    "▸ Ensures cross-functional voices are captured before gate reviews",
+], font_size=13, color=DGRAY, title="Stakeholder Inputs",
+   title_size=18, title_color=TEAL)
+
+add_bullet_frame(slide, Inches(7.0), Inches(1.3), Inches(5.8), Inches(3.5), [
+    "▸ Non-PMP team members can request changes via structured Change Request form",
+    "▸ Covers: milestone dates, budget adjustments, risk re-assessments, resource reallocations",
+    "▸ PMP reviews and approves/rejects with timestamp, rationale, and audit trail",
+    "▸ Prevents unauthorized changes while preserving team agility",
+    "▸ Every request and decision captured in 21 CFR Part 11 audit trail",
+    "▸ Balances governance with speed — critical for regulated product development",
+], font_size=13, color=DGRAY, title="Change Request Workflow",
+   title_size=18, title_color=TEAL)
+
+add_shape_bg(slide, Inches(0.3), Inches(5.3), Inches(12.7), Inches(1.8), LGRAY)
+add_bullet_frame(slide, Inches(0.5), Inches(5.4), Inches(12.3), Inches(1.6), [
+    "No competitor has structured stakeholder inputs tied to phase-gate decisions. In generic PM tools, "
+    "stakeholder feedback is scattered across comments, emails, and meetings with no traceability. "
+    "Control Tower ensures every voice is heard, every change is governed, and every decision is audit-logged.",
+], font_size=13, color=DGRAY, title="Why This Matters",
+   title_size=15, title_color=RED)
+
+# ── QMS-Lite for Startups ──
+slide = prs.slides.add_slide(prs.slide_layouts[6])
+add_bg(slide, WHITE)
+add_shape_bg(slide, Inches(0), Inches(0), W, Inches(1.1), NAVY)
+add_text_box(slide, Inches(0.6), Inches(0.15), Inches(8), Inches(0.5),
+             "CROSS-CUTTING FEATURES",
+             font_size=13, color=TEAL, bold=True)
+add_text_box(slide, Inches(0.6), Inches(0.45), Inches(10), Inches(0.55),
+             "QMS-Lite for Startups",
+             font_size=26, color=WHITE, bold=True)
+add_text_box(slide, Inches(10.5), Inches(0.3), Inches(2.5), Inches(0.5),
+             "510(k) Bridge", font_size=16, color=TEAL, bold=True,
+             alignment=PP_ALIGN.RIGHT)
+
+qms_mappings = [
+    ("Document Control (ISO 13485 §4.2.4)", "→ Tab 8: Document Control"),
+    ("Risk Management (ISO 14971)", "→ Tab 6: Risk Dashboard"),
+    ("Design & Dev Controls (21 CFR 820.30)", "→ Tabs 1-4: Milestones + Actions + DHF/DMR"),
+    ("CAPA (21 CFR 820.198)", "→ Tab 4: Actions Panel — CAPA Log"),
+    ("Supplier Controls (21 CFR 820.50)", "→ Tab 15: Suppliers"),
+    ("Audit Trail (21 CFR Part 11)", "→ Tab 9: Audit Trail"),
+    ("Management Review", "→ Tab 2: Gate System — gate decisions"),
+    ("Training Records", "→ Tab 14: Resources — team qualifications"),
+    ("Regulatory Submissions", "→ Tab 7: FDA Comms Center"),
+]
+
+for i, (req, mapping) in enumerate(qms_mappings):
+    top = Inches(1.4) + i * Inches(0.48)
+    add_shape_bg(slide, Inches(0.5), top, Inches(5.5), Inches(0.42),
+                 LGRAY if i % 2 == 0 else WHITE)
+    add_text_box(slide, Inches(0.6), top + Inches(0.05), Inches(5.3), Inches(0.35),
+                 req, font_size=12, color=DGRAY, bold=True)
+    add_shape_bg(slide, Inches(6.0), top, Inches(6.5), Inches(0.42),
+                 LGRAY if i % 2 == 0 else WHITE)
+    add_text_box(slide, Inches(6.1), top + Inches(0.05), Inches(6.3), Inches(0.35),
+                 mapping, font_size=12, color=TEAL)
+
+add_shape_bg(slide, Inches(0.3), Inches(5.8), Inches(12.7), Inches(1.4), LGRAY)
+add_bullet_frame(slide, Inches(0.5), Inches(5.9), Inches(12.3), Inches(1.2), [
+    "Startups don't need Greenlight Guru ($30K+/yr) or MasterControl ($50K+/yr) to demonstrate QMS readiness. "
+    "Control Tower maps 9 core QMS requirements to existing tabs — giving startups an 80% QMS solution "
+    "at a fraction of the cost. Perfect for seed-stage companies preparing for their first FDA submission.",
+], font_size=13, color=DGRAY, title="80% QMS Coverage at Startup-Friendly Pricing",
+   title_size=15, title_color=NAVY)
+
+# ── Notifications, Alerts & Export Report ──
+slide = prs.slides.add_slide(prs.slide_layouts[6])
+add_bg(slide, WHITE)
+add_shape_bg(slide, Inches(0), Inches(0), W, Inches(1.1), NAVY)
+add_text_box(slide, Inches(0.6), Inches(0.15), Inches(8), Inches(0.5),
+             "CROSS-CUTTING FEATURES",
+             font_size=13, color=TEAL, bold=True)
+add_text_box(slide, Inches(0.6), Inches(0.45), Inches(10), Inches(0.55),
+             "Notifications, Alerts & Executive Report",
+             font_size=26, color=WHITE, bold=True)
+add_text_box(slide, Inches(10.5), Inches(0.3), Inches(2.5), Inches(0.5),
+             "510(k) Bridge", font_size=16, color=TEAL, bold=True,
+             alignment=PP_ALIGN.RIGHT)
+
+add_bullet_frame(slide, Inches(0.8), Inches(1.3), Inches(5.8), Inches(3.5), [
+    "▸ Notification bar with 5 alert types: overdue milestones, gate reviews due, "
+    "high-priority actions, budget variances, and red-risk alerts",
+    "▸ Badge count on the notification bell — unread alerts at a glance",
+    "▸ Click-to-navigate: each alert links directly to the relevant tab and record",
+    "▸ Configurable notification preferences per user role",
+    "▸ Proactive alerting prevents missed deadlines and gate delays",
+], font_size=13, color=DGRAY, title="Smart Notifications & Alerts",
+   title_size=18, title_color=TEAL)
+
+add_bullet_frame(slide, Inches(7.0), Inches(1.3), Inches(5.8), Inches(3.5), [
+    "▸ One-click Executive Report — comprehensive HTML export of entire project status",
+    "▸ Covers: milestone progress, gate status, risk summary, budget variance, team utilization",
+    "▸ Professional formatting ready for board presentations or investor updates",
+    "▸ Includes Regulatory Readiness Guardrails: 3-panel system with 11 automated checks",
+    "▸ Checks: SE argument strength, Performance Data completeness, Biocompatibility status, "
+    "Software Documentation (IEC 62304), 21 CFR 820 Design Controls, and more",
+    "▸ Auto-generated guardrail score gives teams a pre-submission confidence rating",
+], font_size=13, color=DGRAY, title="Export Report & Readiness Guardrails",
+   title_size=18, title_color=TEAL)
+
+add_shape_bg(slide, Inches(0.3), Inches(5.3), Inches(12.7), Inches(1.8), LGRAY)
+add_bullet_frame(slide, Inches(0.5), Inches(5.4), Inches(12.3), Inches(1.6), [
+    "Generic PM tools have basic notifications but zero regulatory awareness. "
+    "Control Tower's alerts are FDA-context-aware — they know when a gate review is overdue, "
+    "when a red risk lacks mitigation, or when a Pre-Sub deadline is approaching. "
+    "The Export Report replaces the manual PowerPoint status decks that consume 4-8 hours per month.",
+], font_size=13, color=DGRAY, title="Why This Matters",
+   title_size=15, title_color=RED)
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# SLIDE — DEVICE TEMPLATES & WIZARD
 # ═══════════════════════════════════════════════════════════════════════
 slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(slide, WHITE)
@@ -557,7 +722,7 @@ add_text_box(slide, Inches(0.6), Inches(0.3), Inches(10), Inches(0.6),
 
 # Roles table
 roles = [
-    ("PMP (Project Manager)", "Full access to all 16 tabs; FDA Comms exclusive", TEAL),
+    ("PMP (Project Manager)", "Full access to all 18 tabs; FDA Comms exclusive", TEAL),
     ("Technology", "Technical/Regulatory tabs, Risks, Docs, Actions, Resources, Message Board", ACCENT),
     ("Business", "Business milestones, Budget, Investment, Cap Table, Message Board", GREEN),
     ("Accounting", "Budget, Cash/Runway, Cap Table (limited editing)", RGBColor(0x7B, 0x1F, 0xA2)),
@@ -575,7 +740,7 @@ for i, (role, access, color) in enumerate(roles):
 tiers = [
     ("Starter — $500/mo", "2 seats", "Dual-Track, Gates, Timeline, Budget", TEAL),
     ("Growth — $1,000/mo", "5 seats", "All except Cap Table, FDA Comms, US Investment", ACCENT),
-    ("Scale — $2,000/mo", "10 seats", "All 16 tabs + FDA Comms + Cap Table", NAVY),
+    ("Scale — $2,000/mo", "10 seats", "All 18 tabs + FDA Comms + Cap Table + Predicate Finder", NAVY),
 ]
 
 add_text_box(slide, Inches(0.5), Inches(4.1), Inches(5), Inches(0.5),
@@ -624,21 +789,22 @@ features = [
     ("Phase-Gate System",           ["✅","❌","❌","❌","❌","❌"]),
     ("FDA Q-Sub Generator",        ["✅","❌","❌","❌","❌","❌"]),
     ("RTA Pre-Check",              ["✅","❌","❌","❌","❌","❌"]),
+    ("Predicate Finder (openFDA)", ["✅","❌","❌","❌","❌","❌"]),
+    ("FDA Guidance Doc Search",    ["✅","❌","❌","❌","❌","❌"]),
     ("ISO 14971 Risk Dashboard",   ["✅","✅","✅","❌","❌","❌"]),
     ("DHF/DMR Tracking",           ["✅","✅","✅","❌","✅","❌"]),
     ("CAPA Management",            ["✅","✅","✅","❌","✅","❌"]),
-    ("Standards Compliance",       ["✅","⚠️","✅","✅","⚠️","❌"]),
+    ("Stakeholder Gate Inputs",    ["✅","❌","❌","❌","❌","❌"]),
     ("Budget & Cash Runway",       ["✅","❌","❌","❌","❌","❌"]),
-    ("Investor Pipeline",          ["✅","❌","❌","❌","❌","❌"]),
-    ("Cap Table",                  ["✅","❌","❌","❌","❌","❌"]),
+    ("Investor Pipeline + Cap Table", ["✅","❌","❌","❌","❌","❌"]),
+    ("QMS-Lite (9 requirements)",  ["✅","✅","✅","❌","✅","❌"]),
     ("Trilingual (EN/CN/KO)",     ["✅","❌","❌","❌","❌","❌"]),
     ("21 CFR Part 11 Audit Trail", ["✅","✅","✅","⚠️","✅","❌"]),
-    ("Role-Based Access",          ["✅","✅","✅","✅","✅","⚠️"]),
     ("Starting Price",             ["$500/mo","~$1K/mo","~$4K/mo","~$3K/mo","~$1K/mo","$10/seat"]),
 ]
 
 for i, (feature, vals) in enumerate(features):
-    top = Inches(1.9) + i * Inches(0.35)
+    top = Inches(1.9) + i * Inches(0.33)
     x_offset = Inches(0.5)
     row_bg = WHITE if i % 2 == 0 else LGRAY
     for j, cw in enumerate(col_widths):
@@ -653,9 +819,9 @@ for i, (feature, vals) in enumerate(features):
             color = GREEN if text == "✅" else (RED if text == "❌" else DGRAY)
             fs = 9
             al = PP_ALIGN.CENTER
-        add_shape_bg(slide, left, top, cw, Inches(0.35), row_bg)
-        add_text_box(slide, left + Inches(0.05), top + Inches(0.03),
-                     cw - Inches(0.1), Inches(0.3), text,
+        add_shape_bg(slide, left, top, cw, Inches(0.33), row_bg)
+        add_text_box(slide, left + Inches(0.05), top + Inches(0.02),
+                     cw - Inches(0.1), Inches(0.29), text,
                      font_size=fs, color=color, alignment=al)
         x_offset += cw
 
@@ -673,13 +839,15 @@ add_text_box(slide, Inches(1), Inches(1.2), Inches(11), Inches(1),
 add_text_box(slide, Inches(1.5), Inches(2.5), Inches(10), Inches(3), (
     "The only platform purpose-built for FDA 510(k) medical device development.\n\n"
     "✓  Replaces 6+ standalone tools (PM, QMS, risk, finance, investor, comms)\n"
+    "✓  18 integrated tabs including Predicate Finder & FDA Guidance Doc Search\n"
     "✓  Automates FDA Q-Sub generation, RTA pre-checks, and MDUFA timeline tracking\n"
+    "✓  Stakeholder Inputs, Change Requests & Regulatory Readiness Guardrails\n"
+    "✓  QMS-Lite maps 9 core quality requirements — 80% QMS at startup pricing\n"
     "✓  Trilingual for US-China and US-Korea market corridors\n"
-    "✓  21 CFR Part 11 audit trail from Day 1\n"
-    "✓  7 device templates — productive in minutes, not weeks\n"
+    "✓  21 CFR Part 11 audit trail from Day 1  •  7 device templates\n"
     "✓  Starting at $500/month — 10× cheaper than enterprise QMS platforms\n\n"
     "From Pre-Submission to FDA Clearance — one platform, one team, one source of truth."
-), font_size=18, color=WHITE, alignment=PP_ALIGN.CENTER)
+), font_size=17, color=WHITE, alignment=PP_ALIGN.CENTER)
 
 add_shape_bg(slide, Inches(4), Inches(5.9), Inches(5.3), Inches(0.03), TEAL)
 
