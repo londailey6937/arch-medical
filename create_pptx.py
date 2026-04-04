@@ -9,8 +9,8 @@ from pptx.enum.shapes import MSO_SHAPE
 import os
 
 # ── Paths ────────────────────────────────────────────────────────────────
-SCREENSHOTS = "/Users/londailey/510kBridge_Webpage/public/screenshots"
-OUTPUT = "/Users/londailey/510kBridge_Webpage/Control_Tower_Sales_Deck.pptx"
+SCREENSHOTS = "/Users/londailey/arch-medical/public/screenshots"
+OUTPUT = "/Users/londailey/arch-medical/Control_Tower_Sales_Deck.pptx"
 
 # ── Brand colours ────────────────────────────────────────────────────────
 NAVY   = RGBColor(0x0B, 0x23, 0x3A)
@@ -197,7 +197,7 @@ slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(slide, WHITE)
 add_shape_bg(slide, Inches(0), Inches(0), W, Inches(1.1), NAVY)
 add_text_box(slide, Inches(0.6), Inches(0.3), Inches(10), Inches(0.6),
-             "Platform Architecture: 18 Integrated Tabs in 5 Groups",
+             "Platform Architecture: 17 Integrated Tabs in 5 Groups",
              font_size=28, color=WHITE, bold=True)
 
 groups = [
@@ -208,9 +208,9 @@ groups = [
                   "17. Predicate Finder", "18. Guidance Docs"]),
     ("DOCUMENTS", ACCENT, ["8. Document Control", "9. Audit Trail"]),
     ("FINANCE", RGBColor(0x7B, 0x1F, 0xA2), ["10. Budget", "11. Cash / Runway",
-               "12. US Investment", "13. Cap Table"]),
-    ("OPERATIONS", GREEN, ["14. Resources", "15. Suppliers",
-                           "16. Message Board"]),
+               "12. US Investment"]),
+    ("OPERATIONS", GREEN, ["13. Resources", "14. Suppliers",
+                           "15. Message Board"]),
 ]
 
 x_start = Inches(0.5)
@@ -409,26 +409,11 @@ tab_data = [
         "▸ Consolidates investor tracking that otherwise lives in scattered spreadsheets and CRMs",
     ],
      "CRM tools (HubSpot, Salesforce) track investor contacts but have no medical-device context. "
-     "Carta handles cap tables but not investor pipeline. "
      "Control Tower provides a specialized investor pipeline that sits alongside the 510(k) program — "
      "so founders can show investors exactly where they are in the regulatory process."
     ),
 
-    (13, "Cap Table", "FINANCE", None, [
-        "▸ Full equity ownership registry: Common, Preferred A/B/C, Options, Warrants",
-        "▸ Auto-calculated ownership percentages and board seat tracking",
-        "▸ Equity events: funding rounds, stock splits, option grants, preferred conversions, warrant exercises",
-        "▸ Vesting schedule administration: 4-year standard with 1-year cliff (customizable)",
-        "▸ Current vested/unvested tracking with next vest date calculation",
-        "▸ Three integrated sections: Shareholders + Equity Events + Vesting Schedules",
-    ],
-     "Carta is the gold standard for cap tables but costs $5K-$50K/yr and is standalone. "
-     "Control Tower's cap table is integrated with the project — "
-     "when a funding round closes (US Investment tab), it can flow into the cap table. "
-     "For early-stage med-device startups, this eliminates yet another standalone tool."
-    ),
-
-    (14, "Resources", "OPERATIONS", "resources", [
+    (13, "Resources", "OPERATIONS", "resources", [
         "▸ Team allocation and utilization monitoring across workstreams",
         "▸ Workstream allocation: % across Technical, Regulatory, Business, Finance (+ custom)",
         "▸ Utilization gauge: Green (<85%), Yellow (85-100%), Red (>100%) — prevents burnout",
@@ -442,7 +427,7 @@ tab_data = [
      "showing at a glance if your V&V engineer is also overloaded on regulatory documentation."
     ),
 
-    (15, "Suppliers", "OPERATIONS", "suppliers", [
+    (14, "Suppliers", "OPERATIONS", "suppliers", [
         "▸ Supplier qualification and PO tracking — aligned with 21 CFR 820 supplier controls",
         "▸ Status lifecycle: Under Review → Qualified → Active → On Hold → Rejected",
         "▸ Fields: component/part, lead time (days), PO status, contract mfg milestones",
@@ -456,7 +441,7 @@ tab_data = [
      "building their first device with 5-15 suppliers."
     ),
 
-    (16, "Message Board", "COMMUNICATIONS", "message-board", [
+    (15, "Message Board", "COMMUNICATIONS", "message-board", [
         "▸ Cross-functional threaded discussions with decision & action tracking",
         "▸ Workstreams: Technical, Regulatory, Business, Finance, Pre-Sub Questions, Other",
         "▸ Intent tags: Discuss, Decide, Inform, Escalate — every conversation has purpose",
@@ -471,7 +456,7 @@ tab_data = [
      "then exports Pre-Sub questions directly to the FDA Communications Center."
     ),
 
-    (17, "Predicate Finder", "REGULATORY", None, [
+    (16, "Predicate Finder", "REGULATORY", None, [
         "▸ Standalone SaaS tool powered by openFDA — search 200K+ cleared 510(k) devices",
         "▸ Search by product code, applicant, device name, or K-number",
         "▸ Real-time FDA database queries — always current data, no stale exports",
@@ -485,7 +470,7 @@ tab_data = [
      "identifying your predicate device — and links it directly into your project."
     ),
 
-    (18, "FDA Guidance Document Search", "REGULATORY", None, [
+    (17, "FDA Guidance Document Search", "REGULATORY", None, [
         "▸ Searchable database of FDA guidance documents relevant to 510(k) submissions",
         "▸ Filter by device type, topic area, publication date, and draft/final status",
         "▸ Quick-reference summaries — understand guidance applicability without reading 100-page PDFs",
@@ -722,10 +707,10 @@ add_text_box(slide, Inches(0.6), Inches(0.3), Inches(10), Inches(0.6),
 
 # Roles table
 roles = [
-    ("PMP (Project Manager)", "Full access to all 18 tabs; FDA Comms exclusive", TEAL),
+    ("PMP (Project Manager)", "Full access to all 17 tabs; FDA Comms exclusive", TEAL),
     ("Technology", "Technical/Regulatory tabs, Risks, Docs, Actions, Resources, Message Board", ACCENT),
-    ("Business", "Business milestones, Budget, Investment, Cap Table, Message Board", GREEN),
-    ("Accounting", "Budget, Cash/Runway, Cap Table (limited editing)", RGBColor(0x7B, 0x1F, 0xA2)),
+    ("Business", "Business milestones, Budget, Investment, Message Board", GREEN),
+    ("Accounting", "Budget, Cash/Runway (limited editing)", RGBColor(0x7B, 0x1F, 0xA2)),
 ]
 
 for i, (role, access, color) in enumerate(roles):
@@ -739,8 +724,8 @@ for i, (role, access, color) in enumerate(roles):
 # Tiers table
 tiers = [
     ("Starter — $500/mo", "2 seats", "Dual-Track, Gates, Timeline, Budget", TEAL),
-    ("Growth — $1,000/mo", "5 seats", "All except Cap Table, FDA Comms, US Investment", ACCENT),
-    ("Scale — $2,000/mo", "10 seats", "All 18 tabs + FDA Comms + Cap Table + Predicate Finder", NAVY),
+    ("Growth — $1,000/mo", "5 seats", "All except FDA Comms, US Investment", ACCENT),
+    ("Scale — $2,000/mo", "10 seats", "All 17 tabs including FDA Comms + Predicate Finder", NAVY),
 ]
 
 add_text_box(slide, Inches(0.5), Inches(4.1), Inches(5), Inches(0.5),
@@ -796,7 +781,7 @@ features = [
     ("CAPA Management",            ["✅","✅","✅","❌","✅","❌"]),
     ("Stakeholder Gate Inputs",    ["✅","❌","❌","❌","❌","❌"]),
     ("Budget & Cash Runway",       ["✅","❌","❌","❌","❌","❌"]),
-    ("Investor Pipeline + Cap Table", ["✅","❌","❌","❌","❌","❌"]),
+    ("Investor Pipeline",              ["✅","❌","❌","❌","❌","❌"]),
     ("QMS-Lite (9 requirements)",  ["✅","✅","✅","❌","✅","❌"]),
     ("Trilingual (EN/CN/KO)",     ["✅","❌","❌","❌","❌","❌"]),
     ("21 CFR Part 11 Audit Trail", ["✅","✅","✅","⚠️","✅","❌"]),
