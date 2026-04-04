@@ -825,11 +825,11 @@ for i, (feature, vals) in enumerate(features):
 slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(slide, NAVY)
 
-add_text_box(slide, Inches(1), Inches(1.2), Inches(11), Inches(1),
+add_text_box(slide, Inches(1), Inches(0.8), Inches(11), Inches(1),
              "为什么选择控制塔？",
              font_size=42, color=WHITE, bold=True, alignment=PP_ALIGN.CENTER)
 
-add_text_box(slide, Inches(1.5), Inches(2.5), Inches(10), Inches(3), (
+add_text_box(slide, Inches(1.5), Inches(1.9), Inches(10), Inches(4.2), (
     "唯一专为FDA 510(k)医疗器械开发打造的平台。\n\n"
     "✓  替代6+个独立工具（PM、QMS、风险、财务、投资、通讯）\n"
     "✓  18个集成标签页，包括谓词查找器和FDA指导文件搜索\n"
@@ -840,11 +840,11 @@ add_text_box(slide, Inches(1.5), Inches(2.5), Inches(10), Inches(3), (
     "✓  从第一天起具备21 CFR Part 11审计追踪  •  7个设备模板\n"
     "✓  起价$500/月——比企业QMS平台便宜10倍\n\n"
     "从Pre-Submission到FDA许可——一个平台，一个团队，一个真实来源。"
-), font_size=17, color=WHITE, alignment=PP_ALIGN.CENTER)
+), font_size=15, color=WHITE, alignment=PP_ALIGN.CENTER)
 
-add_shape_bg(slide, Inches(4), Inches(5.9), Inches(5.3), Inches(0.03), TEAL)
+add_shape_bg(slide, Inches(4), Inches(6.2), Inches(5.3), Inches(0.03), TEAL)
 
-add_text_box(slide, Inches(1), Inches(6.2), Inches(11), Inches(0.8),
+add_text_box(slide, Inches(1), Inches(6.45), Inches(11), Inches(0.8),
              "510(k) Bridge  •  俄勒冈州格雷舍姆  •  www.510kbridge.com\n"
              "预约演示  •  info@510kbridge.com",
              font_size=16, color=TEAL, alignment=PP_ALIGN.CENTER)

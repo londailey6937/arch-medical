@@ -832,11 +832,11 @@ for i, (feature, vals) in enumerate(features):
 slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(slide, NAVY)
 
-add_text_box(slide, Inches(1), Inches(1.2), Inches(11), Inches(1),
+add_text_box(slide, Inches(1), Inches(0.8), Inches(11), Inches(1),
              "Why Control Tower?",
              font_size=42, color=WHITE, bold=True, alignment=PP_ALIGN.CENTER)
 
-add_text_box(slide, Inches(1.5), Inches(2.5), Inches(10), Inches(3), (
+add_text_box(slide, Inches(1.5), Inches(1.9), Inches(10), Inches(4.2), (
     "The only platform purpose-built for FDA 510(k) medical device development.\n\n"
     "✓  Replaces 6+ standalone tools (PM, QMS, risk, finance, investor, comms)\n"
     "✓  18 integrated tabs including Predicate Finder & FDA Guidance Doc Search\n"
@@ -847,11 +847,11 @@ add_text_box(slide, Inches(1.5), Inches(2.5), Inches(10), Inches(3), (
     "✓  21 CFR Part 11 audit trail from Day 1  •  7 device templates\n"
     "✓  Starting at $500/month — 10× cheaper than enterprise QMS platforms\n\n"
     "From Pre-Submission to FDA Clearance — one platform, one team, one source of truth."
-), font_size=17, color=WHITE, alignment=PP_ALIGN.CENTER)
+), font_size=15, color=WHITE, alignment=PP_ALIGN.CENTER)
 
-add_shape_bg(slide, Inches(4), Inches(5.9), Inches(5.3), Inches(0.03), TEAL)
+add_shape_bg(slide, Inches(4), Inches(6.2), Inches(5.3), Inches(0.03), TEAL)
 
-add_text_box(slide, Inches(1), Inches(6.2), Inches(11), Inches(0.8),
+add_text_box(slide, Inches(1), Inches(6.45), Inches(11), Inches(0.8),
              "510(k) Bridge  •  Gresham, Oregon  •  www.510kbridge.com\n"
              "Schedule a Demo  •  info@510kbridge.com",
              font_size=16, color=TEAL, alignment=PP_ALIGN.CENTER)
