@@ -280,12 +280,14 @@ tab_data = [
         "▸ Auto-generated from device template or wizard inputs — instant project skeleton",
         "▸ Editable events with team-modifiable text and impact levels",
         "▸ Events linked to Dual-Track milestones for full traceability",
-        "▸ Gives executives a single-page view of the entire 510(k) program lifecycle",
+        "▸ Full lifecycle from concept through post-market — a mini MDUFA day-badge at the submission row links to the radial clock in FDA Comms",
     ],
      "Gantt charts in MS Project or Monday.com are generic bars — "
      "they don't know an FDA milestone from a marketing campaign. "
      "Control Tower's timeline is purpose-built for 510(k) programs "
-     "with built-in FDA terminology and impact-flagging."
+     "with built-in FDA terminology and impact-flagging. "
+     "The MDUFA 90-day radial clock gauge (Day 15 RTA → Day 60 review → Day 90 decision) "
+     "is tracked in the FDA Comms tab, with a mini day-badge visible on the Timeline."
     ),
 
     (4, "Actions Panel", "PROGRAM MANAGEMENT", "actions", [
@@ -335,7 +337,7 @@ tab_data = [
         "▸ Q-Sub Cover Letter Generator — 5 types (Pre-Sub Meeting, Written Questions, Controlled Correspondence, etc.)",
         "▸ Export Question Package — pulls Pre-Sub question threads from Message Board into formatted FDA package",
         "▸ Refuse-to-Accept (RTA) Checklist — 17-item self-validation against FDA acceptance criteria",
-        "▸ MDUFA Review Timeline — Day 1 through Day 90 milestone tracking for standard 510(k) review",
+        "▸ MDUFA 90-Day Radial Clock Gauge — color-coded dial (green/amber/red) showing Day X / 90 with milestone markers at Day 15, 60, 90; auto-pauses when FDA requests Additional Information",
         "▸ Substantial Equivalence Decision Flowchart — FDA's SE determination logic visualized",
     ],
      "NO COMPETITOR HAS THIS. No existing platform generates FDA Q-Sub cover letters, "
@@ -825,7 +827,7 @@ add_text_box(slide, Inches(1.5), Inches(1.9), Inches(10), Inches(4.2), (
     "The only platform purpose-built for FDA 510(k) medical device development.\n\n"
     "✓  Replaces 6+ standalone tools (PM, QMS, risk, finance, investor, comms)\n"
     "✓  18 integrated tabs including Predicate Finder & FDA Guidance Doc Search\n"
-    "✓  Automates FDA Q-Sub generation, RTA pre-checks, and MDUFA timeline tracking\n"
+    "✓  Automates FDA Q-Sub generation, RTA pre-checks, and MDUFA 90-day radial clock gauge + Timeline day-badge\n"
     "✓  Stakeholder Inputs, Change Requests & Regulatory Readiness Guardrails\n"
     "✓  QMS-Lite maps 9 core quality requirements — 80% QMS at startup pricing\n"
     "✓  Trilingual for US-China and US-Korea market corridors\n"
