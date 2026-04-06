@@ -9,6 +9,7 @@ export default defineConfig({
         main: "index.html",
         cn: "cn.html",
         ko: "ko.html",
+        admin: "admin.html",
       },
     },
   },

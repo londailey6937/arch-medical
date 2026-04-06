@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>510k Bridge — CMS Admin</title>
+    <style>
+      :root {
+        --bg: #0e1117;
+        --surface: #161b22;
+        --border: #30363d;
+        --text: #e6edf3;
+        --text-muted: #8b949e;
+        --accent: #58a6ff;
+        --success: #3fb950;
+        --danger: #f85149;
+        --radius: 8px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      h1 {
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        color: var(--text-muted);
+        margin-bottom: 24px;
+      }
+
+      /* Auth */
+      #auth-panel {
+        max-width: 400px;
+        margin: 80px auto;
+      }
+      #auth-panel input {
+        width: 100%;
+        padding: 10px 14px;
+        margin-bottom: 12px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      /* Tabs */
+      .tabs {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--border);
+      }
+      .tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s;
+      }
+      .tab:hover {
+        color: var(--text);
+      }
+      .tab.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+
+      /* Lang selector */
+      .lang-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .lang-tab {
+        padding: 6px 16px;
+        cursor: pointer;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+      }
+      .lang-tab.active {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* Cards */
+      .cms-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+        margin-bottom: 16px;
+      }
+      .cms-card h3 {
+        font-size: 1rem;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+      .field {
+        margin-bottom: 14px;
+      }
+      .field label {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .field input,
+      .field textarea {
+        width: 100%;
+        padding: 8px 12px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        color: var(--text);
+        font-size: 0.9rem;
+        font-family: inherit;
+      }
+      .field textarea {
+        min-height: 80px;
+        resize: vertical;
+      }
+      .field-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .features-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .features-list input {
+        font-size: 0.85rem;
+      }
+      .feature-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .feature-row button {
+        background: none;
+        border: none;
+        color: var(--danger);
+        cursor: pointer;
+        font-size: 1.1rem;
+        padding: 4px;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 20px;
+        border-radius: var(--radius);
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: none;
+        transition: 0.2s;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #000;
+      }
+      .btn-primary:hover {
+        opacity: 0.9;
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--accent);
+        border: 1px solid var(--accent);
+      }
+      .btn-outline:hover {
+        background: rgba(88, 166, 255, 0.1);
+      }
+      .btn-danger {
+        background: transparent;
+        color: var(--danger);
+        border: 1px solid var(--danger);
+      }
+      .btn-small {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+      .btn-group {
+        display: flex;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      /* Status */
+      .status-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 10px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+      }
+      .status-bar .left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .status-bar .right {
+        display: flex;
+        gap: 8px;
+      }
+      .status-msg {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        transition: color 0.3s;
+      }
+      .status-msg.ok {
+        color: var(--success);
+      }
+      .status-msg.err {
+        color: var(--danger);
+      }
+      .main-content {
+        margin-top: 60px;
+      }
+
+      /* Checkbox */
+      .toggle-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .toggle-row input[type="checkbox"] {
+        accent-color: var(--accent);
+      }
+
+      /* Preview */
+      .preview-frame {
+        background: #fff;
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-top: 16px;
+      }
+      .preview-frame iframe {
+        width: 100%;
+        height: 600px;
+        border: none;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      /* Add button */
+      .add-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px;
+        color: var(--accent);
+        cursor: pointer;
+        border: 1px dashed var(--border);
+        border-radius: var(--radius);
+        background: none;
+        width: 100%;
+        justify-content: center;
+        margin-top: 8px;
+      }
+      .add-item:hover {
+        border-color: var(--accent);
+        background: rgba(88, 166, 255, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ─── AUTH ─────────────────────────────────── -->
+    <div id="auth-panel">
+      <div class="container">
+        <h1>🏛 510k Bridge CMS</h1>
+        <p class="subtitle">Sign in to manage website content</p>
+        <input type="email" id="auth-email" placeholder="Email" />
+        <input type="password" id="auth-password" placeholder="Password" />
+        <button class="btn btn-primary" id="auth-login" style="width: 100%">
+          Sign In
+        </button>
+        <p
+          id="auth-error"
+          style="color: var(--danger); margin-top: 12px; font-size: 0.85rem"
+        ></p>
+      </div>
+    </div>
+
+    <!-- ─── MAIN ─────────────────────────────────── -->
+    <div id="main-panel" class="hidden">
+      <div class="status-bar">
+        <div class="left">
+          <strong>🏛 510k Bridge CMS</strong>
+          <span class="status-msg" id="statusMsg">Ready</span>
+        </div>
+        <div class="right">
+          <button class="btn btn-primary" id="saveBtn">💾 Save All</button>
+          <button class="btn btn-outline btn-small" id="logoutBtn">
+            Sign Out
+          </button>
+        </div>
+      </div>
+
+      <div class="container main-content">
+        <!-- Section tabs -->
+        <div class="tabs" id="sectionTabs">
+          <button class="tab active" data-section="tiers">
+            Tiers / Pricing
+          </button>
+          <button class="tab" data-section="testimonials">Testimonials</button>
+          <button class="tab" data-section="highlights">Highlights</button>
+        </div>
+
+        <!-- Language tabs -->
+        <div class="lang-tabs" id="langTabs">
+          <button class="lang-tab active" data-lang="en">🇺🇸 English</button>
+          <button class="lang-tab" data-lang="cn">🇨🇳 中文</button>
+          <button class="lang-tab" data-lang="ko">🇰🇷 한국어</button>
+        </div>
+
+        <!-- Content area -->
+        <div id="contentArea"></div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+      const SUPABASE_URL = "https://fllqdhvvnqoayugohzld.supabase.co";
+      const SUPABASE_ANON = "sb_publishable_mM9VIE_SOUb956b_7UeTzw_n9QaNuiL";
+      const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+      // ── State ────────────────────────────────────
+      let currentSection = "tiers";
+      let currentLang = "en";
+      let contentCache = {}; // "lang:section" → content object
+      let dirty = false;
+
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => document.querySelectorAll(s);
+
+      // ── Auth ─────────────────────────────────────
+      async function checkSession() {
+        const { data } = await sb.auth.getSession();
+        if (data?.session) showMain();
+      }
+
+      $("#auth-login").addEventListener("click", async () => {
+        const email = $("#auth-email").value.trim();
+        const pass = $("#auth-password").value;
+        const { error } = await sb.auth.signInWithPassword({
+          email,
+          password: pass,
+        });
+        if (error) {
+          $("#auth-error").textContent = error.message;
+        } else {
+          showMain();
+        }
+      });
+
+      $("#logoutBtn").addEventListener("click", async () => {
+        await sb.auth.signOut();
+        location.reload();
+      });
+
+      function showMain() {
+        $("#auth-panel").classList.add("hidden");
+        $("#main-panel").classList.remove("hidden");
+        loadAllContent();
+      }
+
+      // ── Load content ─────────────────────────────
+      async function loadAllContent() {
+        const { data, error } = await sb
+          .from("cms_sections")
+          .select("*")
+          .eq("page", "home");
+
+        if (error) {
+          setStatus("Failed to load: " + error.message, "err");
+          return;
+        }
+
+        contentCache = {};
+        for (const row of data) {
+          contentCache[`${row.lang}:${row.section_key}`] = {
+            id: row.id,
+            content: row.content,
+          };
+        }
+        renderContent();
+        setStatus("Loaded", "ok");
+      }
+
+      // ── Render ───────────────────────────────────
+      function renderContent() {
+        const area = $("#contentArea");
+        const key = `${currentLang}:${currentSection}`;
+        const entry = contentCache[key];
+
+        if (!entry) {
+          area.innerHTML = `<p style="color:var(--text-muted)">No content found for ${currentLang}/${currentSection}. Run the seed script first.</p>`;
+          return;
+        }
+
+        const items = entry.content.items || [];
+
+        if (currentSection === "tiers") {
+          area.innerHTML =
+            items.map((t, i) => renderTierCard(t, i)).join("") +
+            `<button class="add-item" onclick="addItem()">+ Add Tier</button>`;
+        } else if (currentSection === "testimonials") {
+          area.innerHTML =
+            items.map((t, i) => renderTestimonialCard(t, i)).join("") +
+            `<button class="add-item" onclick="addItem()">+ Add Testimonial</button>`;
+        } else if (currentSection === "highlights") {
+          area.innerHTML =
+            items.map((h, i) => renderHighlightCard(h, i)).join("") +
+            `<button class="add-item" onclick="addItem()">+ Add Highlight</button>`;
+        }
+      }
+
+      function renderTierCard(t, idx) {
+        const featureInputs = (t.features || [])
+          .map(
+            (f, fi) => `
+          <div class="feature-row">
+            <input value="${escAttr(f)}" onchange="updateFeature(${idx},${fi},this.value)" />
+            <button onclick="removeFeature(${idx},${fi})">×</button>
+          </div>`,
+          )
+          .join("");
+
+        return `
+        <div class="cms-card">
+          <h3>${t.title || "New Tier"} ${t.featured ? "⭐" : ""}</h3>
+          <div class="field-row">
+            <div class="field">
+              <label>Label</label>
+              <input value="${escAttr(t.label)}" onchange="updateField(${idx},'label',this.value)" />
+            </div>
+            <div class="field">
+              <label>Title</label>
+              <input value="${escAttr(t.title)}" onchange="updateField(${idx},'title',this.value)" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Price</label>
+              <input value="${escAttr(t.price)}" onchange="updateField(${idx},'price',this.value)" />
+            </div>
+            <div class="field">
+              <label>CTA Text</label>
+              <input value="${escAttr(t.cta_text)}" onchange="updateField(${idx},'cta_text',this.value)" />
+            </div>
+          </div>
+          <div class="toggle-row">
+            <input type="checkbox" ${t.featured ? "checked" : ""} onchange="updateField(${idx},'featured',this.checked)" />
+            <label>Featured (highlighted card)</label>
+          </div>
+          <div class="field">
+            <label>Description</label>
+            <textarea onchange="updateField(${idx},'description',this.value)">${escHtml(t.description || "")}</textarea>
+          </div>
+          <div class="field">
+            <label>Features</label>
+            <div class="features-list">
+              ${featureInputs}
+            </div>
+            <button class="btn btn-outline btn-small" style="margin-top:6px" onclick="addFeature(${idx})">+ Add Feature</button>
+          </div>
+          <div class="field">
+            <label>Cost Context</label>
+            <textarea onchange="updateField(${idx},'cost_context',this.value)">${escHtml(t.cost_context || "")}</textarea>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-danger btn-small" onclick="removeItem(${idx})">Delete Tier</button>
+          </div>
+        </div>`;
+      }
+
+      function renderTestimonialCard(t, idx) {
+        return `
+        <div class="cms-card">
+          <h3>${t.author || "New Testimonial"}</h3>
+          <div class="field">
+            <label>Quote</label>
+            <textarea onchange="updateField(${idx},'quote',this.value)">${escHtml(t.quote || "")}</textarea>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Author</label>
+              <input value="${escAttr(t.author)}" onchange="updateField(${idx},'author',this.value)" />
+            </div>
+            <div class="field">
+              <label>Subtitle</label>
+              <input value="${escAttr(t.subtitle)}" onchange="updateField(${idx},'subtitle',this.value)" />
+            </div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-danger btn-small" onclick="removeItem(${idx})">Delete</button>
+          </div>
+        </div>`;
+      }
+
+      function renderHighlightCard(h, idx) {
+        return `
+        <div class="cms-card">
+          <h3>${h.icon || ""} ${h.title || "New Highlight"}</h3>
+          <div class="field-row">
+            <div class="field">
+              <label>Icon (emoji)</label>
+              <input value="${escAttr(h.icon)}" onchange="updateField(${idx},'icon',this.value)" style="max-width:80px" />
+            </div>
+            <div class="field">
+              <label>Title</label>
+              <input value="${escAttr(h.title)}" onchange="updateField(${idx},'title',this.value)" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Description</label>
+            <textarea onchange="updateField(${idx},'description',this.value)">${escHtml(h.description || "")}</textarea>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-danger btn-small" onclick="removeItem(${idx})">Delete</button>
+          </div>
+        </div>`;
+      }
+
+      // ── Editing helpers ──────────────────────────
+      function getItems() {
+        const key = `${currentLang}:${currentSection}`;
+        return contentCache[key]?.content?.items || [];
+      }
+
+      function setItems(items) {
+        const key = `${currentLang}:${currentSection}`;
+        if (!contentCache[key]) return;
+        contentCache[key].content.items = items;
+        dirty = true;
+        setStatus("Unsaved changes", "");
+      }
+
+      window.updateField = function (idx, field, value) {
+        const items = getItems();
+        items[idx][field] = value;
+        setItems(items);
+      };
+
+      window.updateFeature = function (idx, fi, value) {
+        const items = getItems();
+        items[idx].features[fi] = value;
+        setItems(items);
+      };
+
+      window.addFeature = function (idx) {
+        const items = getItems();
+        items[idx].features = items[idx].features || [];
+        items[idx].features.push("");
+        setItems(items);
+        renderContent();
+      };
+
+      window.removeFeature = function (idx, fi) {
+        const items = getItems();
+        items[idx].features.splice(fi, 1);
+        setItems(items);
+        renderContent();
+      };
+
+      window.addItem = function () {
+        const items = getItems();
+        if (currentSection === "tiers") {
+          items.push({
+            key: "new-tier",
+            label: "",
+            title: "",
+            price: "",
+            featured: false,
+            description: "",
+            features: [],
+            cost_context: "",
+            cta_text: "Get Started",
+            cta_style: "outline",
+          });
+        } else if (currentSection === "testimonials") {
+          items.push({ quote: "", author: "", subtitle: "" });
+        } else if (currentSection === "highlights") {
+          items.push({ icon: "", title: "", description: "" });
+        }
+        setItems(items);
+        renderContent();
+      };
+
+      window.removeItem = function (idx) {
+        if (!confirm("Remove this item?")) return;
+        const items = getItems();
+        items.splice(idx, 1);
+        setItems(items);
+        renderContent();
+      };
+
+      // ── Save ─────────────────────────────────────
+      $("#saveBtn").addEventListener("click", async () => {
+        setStatus("Saving...", "");
+        let errors = 0;
+
+        for (const [key, entry] of Object.entries(contentCache)) {
+          const [lang, section_key] = key.split(":");
+          const { error } = await sb
+            .from("cms_sections")
+            .update({ content: entry.content })
+            .eq("id", entry.id);
+
+          if (error) {
+            console.error(`Save failed for ${key}:`, error.message);
+            errors++;
+          }
+        }
+
+        if (errors) {
+          setStatus(`Save failed (${errors} errors)`, "err");
+        } else {
+          dirty = false;
+          setStatus("Saved ✓", "ok");
+        }
+      });
+
+      // ── Tab switching ────────────────────────────
+      $$("#sectionTabs .tab").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          $$(".tab").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentSection = btn.dataset.section;
+          renderContent();
+        });
+      });
+
+      $$("#langTabs .lang-tab").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          $$(".lang-tab").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentLang = btn.dataset.lang;
+          renderContent();
+        });
+      });
+
+      // ── Utilities ────────────────────────────────
+      function escAttr(s) {
+        return (s || "")
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
+          .replace(/</g, "&lt;");
+      }
+      function escHtml(s) {
+        return (s || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      function setStatus(msg, cls) {
+        const el = $("#statusMsg");
+        el.textContent = msg;
+        el.className = "status-msg" + (cls ? " " + cls : "");
+      }
+
+      // Warn on unsaved changes
+      window.addEventListener("beforeunload", (e) => {
+        if (dirty) {
+          e.preventDefault();
+          e.returnValue = "";
+        }
+      });
+
+      // Boot
+      checkSession();
+    </script>
+  </body>
+</html>
