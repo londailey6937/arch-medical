@@ -256,6 +256,206 @@
           automation, and team collaboration.
         </p>
 
+        <!-- 510(k) Lifecycle Guided Tour -->
+        <div class="lifecycle-tour" id="lifecycleTour">
+          <h3 class="tour-carousel-title">▶ 510(k) Lifecycle Walkthrough</h3>
+          <p class="tour-carousel-sub">
+            See how the Control Tower guides a medical device from Pre-Sub
+            through FDA clearance — step by step.
+          </p>
+          <div class="tour-carousel">
+            <button
+              class="tour-nav tour-nav-prev"
+              id="tourPrev"
+              aria-label="Previous"
+            >
+              ‹
+            </button>
+            <div class="tour-slide-container" id="tourSlides">
+              <div class="tour-slide active" data-step="0">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/dual-track.png"
+                    alt="Dual-Track Overview"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">Step 1 of 8</span>
+                  <h4>Dual-Track Overview</h4>
+                  <p>
+                    The Control Tower organizes your 510(k) program into two
+                    parallel tracks: Technical (testing, V&amp;V, prototypes)
+                    and Regulatory (Pre-Sub, 510(k) filing, FDA clearance). Both
+                    progress simultaneously — the Dual-Track view shows every
+                    milestone at a glance.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="1">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/regulatory-tracker.png"
+                    alt="Pre-Sub Filing"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">Step 2 of 8</span>
+                  <h4>Pre-Sub Filing (M+0)</h4>
+                  <p>
+                    Your first regulatory action: file the Pre-Submission
+                    (Q-Sub) package with FDA at Month 0. This requests formal
+                    feedback on your predicate device selection, testing
+                    protocol, and software classification before committing
+                    resources.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="2">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/fda-comms.png"
+                    alt="FDA Feedback"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">Step 3 of 8</span>
+                  <h4>Pre-Sub Meeting &amp; FDA Feedback (M+2)</h4>
+                  <p>
+                    The Regulatory tab tracks your Pre-Sub timeline: Day 0
+                    filing → Day 15 FDA acknowledgment → Day 30 meeting
+                    scheduled → Day 70–75 written feedback. FDA's response
+                    letter becomes the blueprint for your testing plan and
+                    510(k) strategy.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="3">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/gate-system.png"
+                    alt="Gate Reviews"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">Step 4 of 8</span>
+                  <h4>Gate Reviews (M+3–5)</h4>
+                  <p>
+                    While testing runs (bench testing, clinical validation), the
+                    Gate System ensures quality checkpoints are met before
+                    advancing. Gates block progression until criteria are
+                    satisfied — preventing premature submissions.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="4">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/timeline.png"
+                    alt="MDUFA Clock"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">Step 5 of 8</span>
+                  <h4>510(k) Filed → MDUFA Clock Starts (M+6)</h4>
+                  <p>
+                    When the 510(k) is submitted, the MDUFA 90-day review clock
+                    starts on the Timeline. The badge shows "Day X / 90" and
+                    changes color: green (&lt;60 days), amber (60–89), red
+                    (≥90). A real-time FDA review countdown.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="5">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/risk-dashboard.png"
+                    alt="FDA Review"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">Step 6 of 8</span>
+                  <h4>FDA Review in Progress (M+7–8)</h4>
+                  <p>
+                    The radial clock gauge shows Day 45 / 90 — halfway through
+                    FDA review. The clock progresses: RTA Screening (Day 1–15) →
+                    RTA Cleared (15–60) → Substantive Review (60–89) → Decision
+                    Pending (90+). An AI request pauses the clock.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="6">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/cash-runway.png"
+                    alt="Clearance"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">Step 7 of 8</span>
+                  <h4>510(k) Clearance (M+9)</h4>
+                  <p>
+                    FDA issues a Substantially Equivalent (SE) order — your
+                    device is cleared! Module A is market-ready while Module B
+                    continues its parallel regulatory path. Cash Runway and
+                    Budget tabs reflect post-clearance revenue projections.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="7">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/dual-track.png"
+                    alt="Module B"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">Step 8 of 8</span>
+                  <h4>Module B Parallel Track (M+12–18)</h4>
+                  <p>
+                    The power of dual-track: while Module A generates revenue
+                    post-clearance, Module B progresses through its own Pre-Sub
+                    → testing → 510(k) → clearance cycle. Every tab updates to
+                    show both modules' combined status — the full 510(k)
+                    lifecycle in one Control Tower.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="tour-nav tour-nav-next"
+              id="tourNext"
+              aria-label="Next"
+            >
+              ›
+            </button>
+          </div>
+          <div class="tour-dots" id="tourDots">
+            <span class="tour-dot active" data-step="0"></span>
+            <span class="tour-dot" data-step="1"></span>
+            <span class="tour-dot" data-step="2"></span>
+            <span class="tour-dot" data-step="3"></span>
+            <span class="tour-dot" data-step="4"></span>
+            <span class="tour-dot" data-step="5"></span>
+            <span class="tour-dot" data-step="6"></span>
+            <span class="tour-dot" data-step="7"></span>
+          </div>
+        </div>
+
         <!-- Hero Features (animated showcase) -->
         <div class="showcase-hero-grid">
           <div class="showcase-hero-card">
@@ -357,8 +557,8 @@
                 Q-Sub cover letter generator, 17-item RTA self-check, MDUFA
                 90-day radial clock gauge (color-coded Day 15 RTA → Day 60
                 review → Day 90 decision, with clock-pause tracking), SE
-                decision flowchart, plus a mini day-badge on the Timeline tab
-                — all in one platform.
+                decision flowchart, plus a mini day-badge on the Timeline tab —
+                all in one platform.
               </p>
             </div>
           </div>

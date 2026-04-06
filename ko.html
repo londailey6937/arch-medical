@@ -266,6 +266,199 @@
           마법사부터 듀얼트랙 개발, FDA 커뮤니케이션 자동화, 팀 협업까지.
         </p>
 
+        <!-- 510(k) 라이프사이클 가이드 투어 -->
+        <div class="lifecycle-tour" id="lifecycleTour">
+          <h3 class="tour-carousel-title">▶ 510(k) 라이프사이클 워크스루</h3>
+          <p class="tour-carousel-sub">
+            Control Tower가 의료기기를 Pre-Sub에서 FDA 승인까지 어떻게
+            안내하는지 단계별로 확인하세요.
+          </p>
+          <div class="tour-carousel">
+            <button
+              class="tour-nav tour-nav-prev"
+              id="tourPrev"
+              aria-label="이전"
+            >
+              ‹
+            </button>
+            <div class="tour-slide-container" id="tourSlides">
+              <div class="tour-slide active" data-step="0">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/dual-track.png"
+                    alt="듀얼 트랙 개요"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">1단계 / 8단계</span>
+                  <h4>듀얼 트랙 개요</h4>
+                  <p>
+                    컨트롤 타워는 510(k) 프로그램을 두 개의 병렬 트랙으로
+                    구성합니다: 기술(테스트, V&amp;V, 프로토타입)과
+                    규제(Pre-Sub, 510(k) 제출, FDA 승인). 듀얼 트랙 뷰에서 모든
+                    마일스톤을 한눈에 확인할 수 있습니다.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="1">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/regulatory-tracker.png"
+                    alt="Pre-Sub 제출"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">2단계 / 8단계</span>
+                  <h4>Pre-Sub 제출 (M+0)</h4>
+                  <p>
+                    첫 번째 규제 조치: 0개월에 FDA에 Pre-Submission(Q-Sub)
+                    패키지를 제출합니다. 리소스를 투입하기 전에 대조 기기 선택,
+                    테스트 프로토콜 및 소프트웨어 분류에 대한 FDA 피드백을 받기
+                    위한 공식 회의를 요청합니다.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="2">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/fda-comms.png"
+                    alt="FDA 피드백"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">3단계 / 8단계</span>
+                  <h4>Pre-Sub 회의 및 FDA 피드백 (M+2)</h4>
+                  <p>
+                    규제 탭은 Pre-Sub 타임라인을 추적합니다: 0일 제출 → 15일 FDA
+                    확인 → 30일 회의 일정 → 70-75일 서면 피드백. FDA의 응답
+                    서한이 테스트 계획과 510(k) 전략의 청사진이 됩니다.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="3">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/gate-system.png"
+                    alt="게이트 리뷰"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">4단계 / 8단계</span>
+                  <h4>게이트 리뷰 (M+3-5)</h4>
+                  <p>
+                    테스트가 진행되는 동안(벤치 테스트, 임상 검증) 게이트
+                    시스템은 진행 전에 품질 체크포인트가 충족되도록 합니다.
+                    기준이 충족될 때까지 진행을 차단하여 조기 제출을 방지합니다.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="4">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/timeline.png"
+                    alt="MDUFA 클록"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">5단계 / 8단계</span>
+                  <h4>510(k) 제출 → MDUFA 클록 시작 (M+6)</h4>
+                  <p>
+                    510(k)가 제출되면 타임라인에서 MDUFA 90일 심사 클록이
+                    시작됩니다. 배지는 "Day X / 90"을 표시하며 색상이
+                    변경됩니다: 녹색(&lt;60일), 주황색(60-89일), 빨간색(≥90일).
+                    실시간 FDA 심사 카운트다운입니다.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="5">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/risk-dashboard.png"
+                    alt="FDA 심사"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">6단계 / 8단계</span>
+                  <h4>FDA 심사 진행 중 (M+7-8)</h4>
+                  <p>
+                    방사형 클록 게이지가 45일/90을 표시합니다 — FDA 심사의 중간
+                    지점. 클록은 단계별로 진행됩니다: RTA 스크리닝(1-15일), RTA
+                    통과(15-60일), 실질 심사(60-89일), 결정 대기(90일+).
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="6">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/cash-runway.png"
+                    alt="승인"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">7단계 / 8단계</span>
+                  <h4>510(k) 승인 (M+9)</h4>
+                  <p>
+                    FDA가 실질적 동등(SE) 결정을 내립니다 — 기기가 승인됩니다!
+                    모듈 A가 시장 출시 준비를 완료하고 모듈 B는 병렬 규제 경로를
+                    계속합니다. 현금 흐름 및 예산 탭이 승인 후 수익 전망을
+                    반영합니다.
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="7">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/dual-track.png"
+                    alt="모듈 B"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">8단계 / 8단계</span>
+                  <h4>모듈 B 병렬 트랙 (M+12-18)</h4>
+                  <p>
+                    듀얼 트랙의 장점: 모듈 A가 승인 후 수익을 창출하는 동안 모듈
+                    B는 자체 Pre-Sub → 테스트 → 510(k) → 승인 주기를 진행합니다.
+                    모든 탭이 두 모듈의 통합 상태를 표시합니다 — 하나의 컨트롤
+                    타워에서 관리되는 전체 510(k) 라이프사이클입니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="tour-nav tour-nav-next"
+              id="tourNext"
+              aria-label="다음"
+            >
+              ›
+            </button>
+          </div>
+          <div class="tour-dots" id="tourDots">
+            <span class="tour-dot active" data-step="0"></span>
+            <span class="tour-dot" data-step="1"></span>
+            <span class="tour-dot" data-step="2"></span>
+            <span class="tour-dot" data-step="3"></span>
+            <span class="tour-dot" data-step="4"></span>
+            <span class="tour-dot" data-step="5"></span>
+            <span class="tour-dot" data-step="6"></span>
+            <span class="tour-dot" data-step="7"></span>
+          </div>
+        </div>
+
         <!-- Hero Features -->
         <div class="showcase-hero-grid">
           <div class="showcase-hero-card">
@@ -363,9 +556,9 @@
             <div class="showcase-hero-label">
               <h3>FDA 커뮤니케이션 센터</h3>
               <p>
-                Q-Sub 커버레터 생성기, 17항 RTA 자가점검, MDUFA 90일 방사형
-                클록 게이지(색상 코드: 15일 차 RTA 스크리닝 → 60일 차 실질 심사
-                → 90일 차 결정 목표, 클록 일시정지 추적 포함), SE 의사결정
+                Q-Sub 커버레터 생성기, 17항 RTA 자가점검, MDUFA 90일 방사형 클록
+                게이지(색상 코드: 15일 차 RTA 스크리닝 → 60일 차 실질 심사 →
+                90일 차 결정 목표, 클록 일시정지 추적 포함), SE 의사결정
                 플로우차트, 타임라인 탭에 미니 일수 배지 — 하나의 플랫폼에서
                 모두 처리.
               </p>

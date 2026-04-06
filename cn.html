@@ -241,6 +241,178 @@
           之旅的每一个方面——从引导式设置向导到双轨道开发、FDA通信自动化和团队协作。
         </p>
 
+        <!-- 510(k) 生命周期引导演示 -->
+        <div class="lifecycle-tour" id="lifecycleTour">
+          <h3 class="tour-carousel-title">▶ 510(k) 生命周期演示</h3>
+          <p class="tour-carousel-sub">
+            了解Control Tower如何引导医疗器械从Pre-Sub到FDA审批——逐步展示。
+          </p>
+          <div class="tour-carousel">
+            <button
+              class="tour-nav tour-nav-prev"
+              id="tourPrev"
+              aria-label="上一步"
+            >
+              ‹
+            </button>
+            <div class="tour-slide-container" id="tourSlides">
+              <div class="tour-slide active" data-step="0">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/dual-track-cn.png"
+                    alt="双轨概览"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">第 1 步 / 共 8 步</span>
+                  <h4>双轨概览</h4>
+                  <p>
+                    控制塔将您的510(k)项目组织为两条平行路径：技术路径（测试、V&amp;V、原型）和监管路径（Pre-Sub、510(k)提交、FDA审批）。两者同时推进——双轨视图一目了然地展示每个里程碑。
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="1">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/regulatory-tracker-cn.png"
+                    alt="Pre-Sub提交"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">第 2 步 / 共 8 步</span>
+                  <h4>Pre-Sub提交 (M+0)</h4>
+                  <p>
+                    您的第一个监管行动：在第0个月向FDA提交预提交（Q-Sub）包。这将请求正式会议，在投入资源前获得FDA对前置器械选择、测试方案和软件分类的反馈。
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="2">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/fda-comms-cn.png"
+                    alt="FDA反馈"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">第 3 步 / 共 8 步</span>
+                  <h4>Pre-Sub会议和FDA反馈 (M+2)</h4>
+                  <p>
+                    监管选项卡跟踪您的Pre-Sub时间线：第0天提交→第15天FDA确认→第30天会议安排→第70-75天书面反馈。FDA的回复函成为您测试计划和510(k)策略的蓝图。
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="3">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/gate-system-cn.png"
+                    alt="阶段评审"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">第 4 步 / 共 8 步</span>
+                  <h4>阶段评审 (M+3-5)</h4>
+                  <p>
+                    在测试运行期间（台架测试、临床验证），阶段门系统确保在推进前满足质量检查点。阶段门在满足标准前阻止推进，防止过早提交。
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="4">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/timeline-cn.png"
+                    alt="MDUFA时钟"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">第 5 步 / 共 8 步</span>
+                  <h4>510(k)提交 → MDUFA时钟启动 (M+6)</h4>
+                  <p>
+                    当510(k)提交时，MDUFA
+                    90天审查时钟在时间线上启动。徽章显示"第X天/90"，颜色变化：绿色（&lt;60天）、琥珀色（60-89天）、红色（≥90天）。实时FDA审查倒计时。
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="5">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/risk-dashboard-cn.png"
+                    alt="FDA审查"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">第 6 步 / 共 8 步</span>
+                  <h4>FDA审查进行中 (M+7-8)</h4>
+                  <p>
+                    径向时钟显示第45天/90——FDA审查已过半。时钟经历各阶段：RTA筛查（第1-15天）、RTA通过（第15-60天）、实质性审查（第60-89天）、等待决定（第90天+）。
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="6">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/cash-runway-cn.png"
+                    alt="审批"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">第 7 步 / 共 8 步</span>
+                  <h4>510(k)批准 (M+9)</h4>
+                  <p>
+                    FDA发出实质等效（SE）决定——您的设备获批！A模块已准备上市，B模块继续其平行监管路径。现金流和预算选项卡反映审批后的收入预测。
+                  </p>
+                </div>
+              </div>
+
+              <div class="tour-slide" data-step="7">
+                <div class="tour-slide-img">
+                  <img
+                    src="screenshots/dual-track-cn.png"
+                    alt="B模块"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="tour-slide-info">
+                  <span class="tour-step-num">第 8 步 / 共 8 步</span>
+                  <h4>B模块平行路径 (M+12-18)</h4>
+                  <p>
+                    双轨的力量：当A模块获批后产生收入时，B模块通过自己的Pre-Sub→测试→510(k)→审批周期推进。每个选项卡都更新以显示两个模块的综合状态——在一个控制塔中管理完整的510(k)生命周期。
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="tour-nav tour-nav-next"
+              id="tourNext"
+              aria-label="下一步"
+            >
+              ›
+            </button>
+          </div>
+          <div class="tour-dots" id="tourDots">
+            <span class="tour-dot active" data-step="0"></span>
+            <span class="tour-dot" data-step="1"></span>
+            <span class="tour-dot" data-step="2"></span>
+            <span class="tour-dot" data-step="3"></span>
+            <span class="tour-dot" data-step="4"></span>
+            <span class="tour-dot" data-step="5"></span>
+            <span class="tour-dot" data-step="6"></span>
+            <span class="tour-dot" data-step="7"></span>
+          </div>
+        </div>
+
         <!-- Hero Features (animated showcase) -->
         <div class="showcase-hero-grid">
           <div class="showcase-hero-card">

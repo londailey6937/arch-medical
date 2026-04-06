@@ -437,3 +437,83 @@ var cardPopupData = [
     if (e.target === lb) lb.classList.remove("active");
   });
 })();
+
+// 510(k) Lifecycle Tour Carousel
+(function () {
+  var slides = document.querySelectorAll(".tour-slide");
+  var dots = document.querySelectorAll(".tour-dot");
+  var prevBtn = document.getElementById("tourPrev");
+  var nextBtn = document.getElementById("tourNext");
+  if (!slides.length || !prevBtn || !nextBtn) return;
+
+  var current = 0;
+  var total = slides.length;
+  var autoTimer = null;
+
+  function goTo(idx) {
+    slides[current].classList.remove("active");
+    dots[current].classList.remove("active");
+    current = (idx + total) % total;
+    slides[current].classList.add("active");
+    dots[current].classList.add("active");
+  }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(function () {
+      goTo(current + 1);
+    }, 6000);
+  }
+
+  function stopAuto() {
+    if (autoTimer) clearInterval(autoTimer);
+    autoTimer = null;
+  }
+
+  prevBtn.addEventListener("click", function () {
+    goTo(current - 1);
+    stopAuto();
+    startAuto();
+  });
+
+  nextBtn.addEventListener("click", function () {
+    goTo(current + 1);
+    stopAuto();
+    startAuto();
+  });
+
+  dots.forEach(function (dot) {
+    dot.addEventListener("click", function () {
+      goTo(parseInt(this.dataset.step, 10));
+      stopAuto();
+      startAuto();
+    });
+  });
+
+  // Keyboard nav when carousel is in viewport
+  document.addEventListener("keydown", function (e) {
+    var rect = document.getElementById("lifecycleTour").getBoundingClientRect();
+    if (rect.top > window.innerHeight || rect.bottom < 0) return;
+    if (e.key === "ArrowLeft") {
+      goTo(current - 1);
+      stopAuto();
+      startAuto();
+    }
+    if (e.key === "ArrowRight") {
+      goTo(current + 1);
+      stopAuto();
+      startAuto();
+    }
+  });
+
+  // Start auto-advance when carousel scrolls into view
+  var tourEl = document.getElementById("lifecycleTour");
+  var observer = new IntersectionObserver(
+    function (entries) {
+      if (entries[0].isIntersecting) startAuto();
+      else stopAuto();
+    },
+    { threshold: 0.3 },
+  );
+  observer.observe(tourEl);
+})();
