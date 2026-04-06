@@ -285,7 +285,24 @@ h3 {
 .tier-price {
   font-size: 1.3rem;
   font-weight: 700;
-  margin: 8px 0 20px;
+  margin: 8px 0 8px;
+}
+.tier-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+.tier-context {
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: rgba(99, 179, 237, 0.08);
+  border-left: 3px solid var(--accent);
+  padding: 8px 12px;
+  margin: 0 0 16px;
+  text-align: left;
+  border-radius: 4px;
+  line-height: 1.4;
 }
 .tier-card ul {
   list-style: none;
