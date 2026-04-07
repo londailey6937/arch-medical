@@ -148,6 +148,12 @@ h3 {
 .lang-btn:hover {
   background: var(--border);
 }
+.lang-btn.lang-active {
+  background: var(--teal);
+  color: #fff;
+  border-color: var(--teal);
+  pointer-events: none;
+}
 
 .mobile-menu {
   display: none;
