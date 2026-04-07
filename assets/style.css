@@ -143,6 +143,7 @@ h3 {
   border-radius: 6px;
   border: 1px solid var(--border);
   font-size: 0.85rem;
+  margin-left: 4px;
 }
 .lang-btn:hover {
   background: var(--border);
