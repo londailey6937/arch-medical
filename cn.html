@@ -1062,7 +1062,24 @@
             <div class="contact-item">
               <strong>微信</strong>
               <p>扫码联系 →</p>
-              <div class="wechat-qr">
+              <div
+                class="wechat-qr"
+                style="text-align: center; margin-top: 0.5rem"
+              >
+                <img
+                  src="wechat-qr.png"
+                  alt="510kBridge 微信二维码"
+                  style="
+                    width: 160px;
+                    height: 160px;
+                    border-radius: 8px;
+                    border: 2px solid var(--border);
+                    background: #fff;
+                    object-fit: contain;
+                  "
+                  onerror="this.style.display = 'none'"
+                />
+                <br />
                 微信号: <strong>510kBridge</strong><br /><span
                   style="font-size: 0.8rem; color: var(--text-muted)"
                   >添加微信快速联系</span
@@ -1153,5 +1170,6 @@
     </footer>
 
     <script src="assets/main-cn.js"></script>
+    <script src="assets/lead-capture.js"></script>
   </body>
 </html>

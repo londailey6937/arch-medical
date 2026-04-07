@@ -10,6 +10,7 @@ export default defineConfig({
         cn: "cn.html",
         ko: "ko.html",
         admin: "admin.html",
+        pipeline: "pipeline.html",
       },
     },
   },

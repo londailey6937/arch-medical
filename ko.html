@@ -3,6 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Analytics (GA4) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
     <title>510k Bridge — 한국 의료기기 기업을 위한 FDA 인허가</title>
     <meta
       name="description"
@@ -1204,5 +1217,6 @@
     </footer>
 
     <script src="assets/main.js"></script>
+    <script src="assets/lead-capture.js"></script>
   </body>
 </html>

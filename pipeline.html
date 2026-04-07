@@ -1,0 +1,1327 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>510k Bridge — AE Sales Pipeline</title>
+    <style>
+      :root {
+        --bg: #0e1117;
+        --surface: #161b22;
+        --surface2: #1c2128;
+        --border: #30363d;
+        --text: #e6edf3;
+        --text-muted: #8b949e;
+        --accent: #58a6ff;
+        --success: #3fb950;
+        --warning: #d29922;
+        --danger: #f85149;
+        --purple: #bc8cff;
+        --radius: 8px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      /* ── Auth ── */
+      #auth-panel {
+        max-width: 400px;
+        margin: 80px auto;
+        padding: 24px;
+      }
+      #auth-panel h1 {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+      }
+      #auth-panel .sub {
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+      }
+      #auth-panel input {
+        width: 100%;
+        padding: 10px 14px;
+        margin-bottom: 12px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+      #auth-error {
+        color: var(--danger);
+        margin-top: 8px;
+        font-size: 0.85rem;
+      }
+
+      /* ── Top bar ── */
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 10px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+      }
+      .topbar .left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .topbar .left strong {
+        font-size: 1rem;
+      }
+      .topbar .right {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .topbar .stats {
+        display: flex;
+        gap: 16px;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+      .topbar .stats .num {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      /* ── Layout ── */
+      .app {
+        margin-top: 56px;
+        display: flex;
+        height: calc(100vh - 56px);
+      }
+      .sidebar {
+        width: 260px;
+        min-width: 260px;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+      }
+      .main-panel {
+        flex: 1;
+        overflow-y: auto;
+        padding: 24px;
+      }
+
+      /* ── View tabs ── */
+      .view-tabs {
+        display: flex;
+        border-bottom: 1px solid var(--border);
+      }
+      .view-tab {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        border-bottom: 2px solid transparent;
+      }
+      .view-tab:hover {
+        color: var(--text);
+      }
+      .view-tab.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+
+      /* ── Filters ── */
+      .filters {
+        padding: 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      .filters select,
+      .filters input {
+        width: 100%;
+        padding: 6px 10px;
+        margin-bottom: 8px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        color: var(--text);
+        font-size: 0.85rem;
+      }
+
+      /* ── Lead list ── */
+      .lead-list {
+        flex: 1;
+        overflow-y: auto;
+      }
+      .lead-item {
+        padding: 12px;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .lead-item:hover {
+        background: var(--surface2);
+      }
+      .lead-item.active {
+        background: var(--surface2);
+        border-left: 3px solid var(--accent);
+      }
+      .lead-item .name {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+      .lead-item .company {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+      .lead-item .meta {
+        display: flex;
+        gap: 8px;
+        margin-top: 4px;
+        align-items: center;
+      }
+      .lead-item .stage-badge {
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .stage-new {
+        background: rgba(88, 166, 255, 0.15);
+        color: var(--accent);
+      }
+      .stage-qualified {
+        background: rgba(188, 140, 255, 0.15);
+        color: var(--purple);
+      }
+      .stage-meeting_scheduled {
+        background: rgba(210, 153, 34, 0.15);
+        color: var(--warning);
+      }
+      .stage-proposal_sent {
+        background: rgba(210, 153, 34, 0.25);
+        color: var(--warning);
+      }
+      .stage-negotiation {
+        background: rgba(63, 185, 80, 0.15);
+        color: var(--success);
+      }
+      .stage-won {
+        background: rgba(63, 185, 80, 0.3);
+        color: var(--success);
+      }
+      .stage-lost {
+        background: rgba(248, 81, 73, 0.15);
+        color: var(--danger);
+      }
+
+      .priority-high {
+        border-left: 3px solid var(--danger);
+      }
+      .priority-medium {
+        border-left: 3px solid var(--warning);
+      }
+      .priority-low {
+        border-left: 3px solid var(--border);
+      }
+
+      /* ── Kanban ── */
+      .kanban {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        min-height: 500px;
+        padding-bottom: 24px;
+      }
+      .kanban-col {
+        min-width: 240px;
+        width: 240px;
+        background: var(--surface);
+        border-radius: var(--radius);
+        display: flex;
+        flex-direction: column;
+      }
+      .kanban-header {
+        padding: 12px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .kanban-header .count {
+        background: var(--bg);
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 0.75rem;
+      }
+      .kanban-cards {
+        flex: 1;
+        padding: 8px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-height: 100px;
+      }
+      .kanban-card {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 10px;
+        cursor: pointer;
+        transition: border-color 0.2s;
+      }
+      .kanban-card:hover {
+        border-color: var(--accent);
+      }
+      .kanban-card .kc-name {
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+      .kanban-card .kc-company {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+      .kanban-card .kc-meta {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+      .kanban-card .kc-followup {
+        color: var(--warning);
+      }
+      .kanban-card .kc-followup.overdue {
+        color: var(--danger);
+      }
+
+      /* ── Detail panel ── */
+      .detail-empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: var(--text-muted);
+      }
+      .detail {
+        max-width: 720px;
+      }
+      .detail h2 {
+        font-size: 1.3rem;
+        margin-bottom: 4px;
+      }
+      .detail .company-line {
+        color: var(--text-muted);
+        margin-bottom: 16px;
+      }
+      .detail-section {
+        margin-bottom: 24px;
+      }
+      .detail-section h3 {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+      }
+      .detail-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .detail-field label {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .detail-field input,
+      .detail-field select,
+      .detail-field textarea {
+        width: 100%;
+        padding: 8px 10px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        color: var(--text);
+        font-size: 0.9rem;
+        font-family: inherit;
+      }
+      .detail-field textarea {
+        min-height: 60px;
+        resize: vertical;
+      }
+      .detail-field.full {
+        grid-column: 1 / -1;
+      }
+
+      /* ── Activity timeline ── */
+      .timeline {
+      }
+      .timeline-item {
+        display: flex;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .timeline-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+      .timeline-icon.note {
+        background: rgba(88, 166, 255, 0.15);
+      }
+      .timeline-icon.email_sent {
+        background: rgba(63, 185, 80, 0.15);
+      }
+      .timeline-icon.email_received {
+        background: rgba(188, 140, 255, 0.15);
+      }
+      .timeline-icon.call {
+        background: rgba(210, 153, 34, 0.15);
+      }
+      .timeline-icon.meeting {
+        background: rgba(248, 81, 73, 0.15);
+      }
+      .timeline-icon.stage_change {
+        background: rgba(88, 166, 255, 0.15);
+      }
+      .timeline-icon.follow_up_set {
+        background: rgba(210, 153, 34, 0.15);
+      }
+      .timeline-body {
+        flex: 1;
+      }
+      .timeline-body .tl-summary {
+        font-size: 0.9rem;
+      }
+      .timeline-body .tl-detail {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+      .timeline-body .tl-time {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      /* ── Add activity ── */
+      .add-activity {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 12px;
+        margin-top: 12px;
+      }
+      .add-activity .row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .add-activity select,
+      .add-activity input,
+      .add-activity textarea {
+        padding: 6px 10px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        color: var(--text);
+        font-size: 0.85rem;
+        font-family: inherit;
+      }
+      .add-activity select {
+        width: 160px;
+      }
+      .add-activity input {
+        flex: 1;
+      }
+      .add-activity textarea {
+        width: 100%;
+        min-height: 40px;
+        resize: vertical;
+      }
+
+      /* ── Buttons ── */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: var(--radius);
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border: none;
+        transition: 0.2s;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #000;
+      }
+      .btn-primary:hover {
+        opacity: 0.9;
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--accent);
+        border: 1px solid var(--accent);
+      }
+      .btn-outline:hover {
+        background: rgba(88, 166, 255, 0.1);
+      }
+      .btn-danger {
+        background: transparent;
+        color: var(--danger);
+        border: 1px solid var(--danger);
+      }
+      .btn-success {
+        background: var(--success);
+        color: #000;
+      }
+      .btn-sm {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+      }
+      .btn-group {
+        display: flex;
+        gap: 8px;
+      }
+
+      /* ── New lead modal ── */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px;
+        width: 480px;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      .modal h2 {
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+      }
+      .modal .field {
+        margin-bottom: 12px;
+      }
+      .modal .field label {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+      }
+      .modal .field input,
+      .modal .field select,
+      .modal .field textarea {
+        width: 100%;
+        padding: 8px 10px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        color: var(--text);
+        font-size: 0.9rem;
+        font-family: inherit;
+      }
+      .modal .field textarea {
+        min-height: 60px;
+      }
+      .modal .btn-group {
+        margin-top: 16px;
+        justify-content: flex-end;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      /* ── Metrics ── */
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .metric-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+        text-align: center;
+      }
+      .metric-card .metric-val {
+        font-size: 2rem;
+        font-weight: 700;
+      }
+      .metric-card .metric-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-top: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── Auth ── -->
+    <div id="auth-panel">
+      <h1>🏛 AE Sales Pipeline</h1>
+      <p class="sub">Sign in to manage leads and follow-ups</p>
+      <input type="email" id="auth-email" placeholder="Email" />
+      <input type="password" id="auth-password" placeholder="Password" />
+      <button class="btn btn-primary" id="auth-login" style="width: 100%">
+        Sign In
+      </button>
+      <p id="auth-error"></p>
+    </div>
+
+    <!-- ── App ── -->
+    <div id="app-panel" class="hidden">
+      <div class="topbar">
+        <div class="left">
+          <strong>🏛 AE Sales Pipeline</strong>
+          <div class="stats">
+            <span>Pipeline: <span class="num" id="statPipeline">0</span></span>
+            <span
+              >Follow-ups today:
+              <span class="num" id="statFollowups">0</span></span
+            >
+            <span>Won: <span class="num" id="statWon">0</span></span>
+          </div>
+        </div>
+        <div class="right">
+          <button class="btn btn-success btn-sm" id="newLeadBtn">
+            + New Lead
+          </button>
+          <button class="btn btn-outline btn-sm" id="logoutBtn">
+            Sign Out
+          </button>
+        </div>
+      </div>
+
+      <div class="app">
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <div class="view-tabs">
+            <button class="view-tab active" data-view="list">List</button>
+            <button class="view-tab" data-view="kanban">Board</button>
+            <button class="view-tab" data-view="metrics">Metrics</button>
+          </div>
+          <div class="filters">
+            <select id="filterStage">
+              <option value="">All Stages</option>
+              <option value="new">New</option>
+              <option value="qualified">Qualified</option>
+              <option value="meeting_scheduled">Meeting Scheduled</option>
+              <option value="proposal_sent">Proposal Sent</option>
+              <option value="negotiation">Negotiation</option>
+              <option value="won">Won</option>
+              <option value="lost">Lost</option>
+            </select>
+            <select id="filterPriority">
+              <option value="">All Priorities</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <input
+              type="search"
+              id="filterSearch"
+              placeholder="Search name or company..."
+            />
+          </div>
+          <div class="lead-list" id="leadList"></div>
+        </div>
+
+        <!-- Main -->
+        <div class="main-panel" id="mainPanel">
+          <div class="detail-empty" id="emptyState">
+            Select a lead or create a new one
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+      const SUPABASE_URL = "https://fllqdhvvnqoayugohzld.supabase.co";
+      const SUPABASE_ANON = "sb_publishable_mM9VIE_SOUb956b_7UeTzw_n9QaNuiL";
+      const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => document.querySelectorAll(s);
+      const esc = (s) =>
+        (s || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+
+      let leads = [];
+      let activities = [];
+      let selectedId = null;
+      let currentView = "list";
+
+      const STAGES = [
+        { key: "new", label: "New" },
+        { key: "qualified", label: "Qualified" },
+        { key: "meeting_scheduled", label: "Meeting Scheduled" },
+        { key: "proposal_sent", label: "Proposal Sent" },
+        { key: "negotiation", label: "Negotiation" },
+        { key: "won", label: "Won" },
+        { key: "lost", label: "Lost" },
+      ];
+
+      const ACTIVITY_ICONS = {
+        note: "📝",
+        email_sent: "📤",
+        email_received: "📥",
+        call: "📞",
+        meeting: "🤝",
+        stage_change: "🔄",
+        follow_up_set: "⏰",
+      };
+
+      // ── Auth ──────────────────────────────────────
+      async function checkSession() {
+        const { data } = await sb.auth.getSession();
+        if (data?.session) showApp();
+      }
+
+      $("#auth-login").addEventListener("click", async () => {
+        const { error } = await sb.auth.signInWithPassword({
+          email: $("#auth-email").value.trim(),
+          password: $("#auth-password").value,
+        });
+        if (error) $("#auth-error").textContent = error.message;
+        else showApp();
+      });
+
+      // Allow Enter key to submit
+      $$("#auth-panel input").forEach((el) => {
+        el.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") $("#auth-login").click();
+        });
+      });
+
+      $("#logoutBtn").addEventListener("click", async () => {
+        await sb.auth.signOut();
+        location.reload();
+      });
+
+      function showApp() {
+        $("#auth-panel").classList.add("hidden");
+        $("#app-panel").classList.remove("hidden");
+        loadLeads();
+      }
+
+      // ── Data ──────────────────────────────────────
+      async function loadLeads() {
+        const { data, error } = await sb
+          .from("leads")
+          .select("*")
+          .order("created_at", { ascending: false });
+        if (error) {
+          console.error(error);
+          return;
+        }
+        leads = data || [];
+        updateStats();
+        renderSidebar();
+        renderMain();
+      }
+
+      async function loadActivities(leadId) {
+        const { data } = await sb
+          .from("lead_activities")
+          .select("*")
+          .eq("lead_id", leadId)
+          .order("created_at", { ascending: false });
+        activities = data || [];
+      }
+
+      function updateStats() {
+        const pipeline = leads.filter(
+          (l) => !["won", "lost"].includes(l.stage),
+        );
+        const today = new Date().toISOString().slice(0, 10);
+        const followups = leads.filter(
+          (l) =>
+            l.next_follow_up &&
+            l.next_follow_up <= today &&
+            !["won", "lost"].includes(l.stage),
+        );
+        const won = leads.filter((l) => l.stage === "won");
+        $("#statPipeline").textContent = pipeline.length;
+        $("#statFollowups").textContent = followups.length;
+        $("#statWon").textContent = won.length;
+      }
+
+      // ── Filtering ─────────────────────────────────
+      function getFiltered() {
+        let filtered = [...leads];
+        const stage = $("#filterStage").value;
+        const priority = $("#filterPriority").value;
+        const search = $("#filterSearch").value.toLowerCase();
+        if (stage) filtered = filtered.filter((l) => l.stage === stage);
+        if (priority)
+          filtered = filtered.filter((l) => l.priority === priority);
+        if (search)
+          filtered = filtered.filter(
+            (l) =>
+              (l.name || "").toLowerCase().includes(search) ||
+              (l.company || "").toLowerCase().includes(search) ||
+              (l.email || "").toLowerCase().includes(search),
+          );
+        return filtered;
+      }
+
+      $("#filterStage").addEventListener("change", () => {
+        renderSidebar();
+        renderMain();
+      });
+      $("#filterPriority").addEventListener("change", () => {
+        renderSidebar();
+        renderMain();
+      });
+      $("#filterSearch").addEventListener("input", () => {
+        renderSidebar();
+        renderMain();
+      });
+
+      // ── View switching ────────────────────────────
+      $$(".view-tab").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          $$(".view-tab").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentView = btn.dataset.view;
+          renderMain();
+        });
+      });
+
+      // ── Sidebar ───────────────────────────────────
+      function renderSidebar() {
+        const filtered = getFiltered();
+        const list = $("#leadList");
+        if (!filtered.length) {
+          list.innerHTML = `<div style="padding:24px;color:var(--text-muted);text-align:center">No leads found</div>`;
+          return;
+        }
+        list.innerHTML = filtered
+          .map((l) => {
+            const followup = l.next_follow_up
+              ? formatDate(l.next_follow_up)
+              : "";
+            return `<div class="lead-item priority-${l.priority} ${l.id === selectedId ? "active" : ""}" data-id="${l.id}">
+            <div class="name">${esc(l.name)}</div>
+            <div class="company">${esc(l.company || "")} ${l.device_type ? "· " + esc(l.device_type) : ""}</div>
+            <div class="meta">
+              <span class="stage-badge stage-${l.stage}">${stageLabel(l.stage)}</span>
+              ${followup ? `<span style="font-size:0.75rem;color:var(--text-muted)">📅 ${followup}</span>` : ""}
+            </div>
+          </div>`;
+          })
+          .join("");
+
+        list.querySelectorAll(".lead-item").forEach((el) => {
+          el.addEventListener("click", () => selectLead(el.dataset.id));
+        });
+      }
+
+      async function selectLead(id) {
+        selectedId = id;
+        renderSidebar();
+        await loadActivities(id);
+        currentView = "list";
+        $$(".view-tab").forEach((b) => b.classList.remove("active"));
+        $('[data-view="list"]').classList.add("active");
+        renderDetail();
+      }
+
+      // ── Main panel ────────────────────────────────
+      function renderMain() {
+        if (currentView === "kanban") renderKanban();
+        else if (currentView === "metrics") renderMetrics();
+        else if (selectedId) renderDetail();
+        else
+          $("#mainPanel").innerHTML =
+            `<div class="detail-empty">Select a lead or create a new one</div>`;
+      }
+
+      // ── Detail view ───────────────────────────────
+      function renderDetail() {
+        const lead = leads.find((l) => l.id === selectedId);
+        if (!lead) {
+          renderMain();
+          return;
+        }
+
+        const panel = $("#mainPanel");
+        panel.innerHTML = `
+          <div class="detail">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:16px">
+              <div>
+                <h2>${esc(lead.name)}</h2>
+                <div class="company-line">${esc(lead.company || "No company")} ${lead.device_type ? "· " + esc(lead.device_type) : ""}</div>
+              </div>
+              <div class="btn-group">
+                <button class="btn btn-primary btn-sm" id="saveLeadBtn">Save</button>
+                <button class="btn btn-danger btn-sm" id="deleteLeadBtn">Delete</button>
+              </div>
+            </div>
+
+            <div class="detail-section">
+              <h3>Lead Info</h3>
+              <div class="detail-grid">
+                <div class="detail-field">
+                  <label>Name</label>
+                  <input id="dName" value="${esc(lead.name)}" />
+                </div>
+                <div class="detail-field">
+                  <label>Email</label>
+                  <input id="dEmail" value="${esc(lead.email || "")}" />
+                </div>
+                <div class="detail-field">
+                  <label>Company</label>
+                  <input id="dCompany" value="${esc(lead.company || "")}" />
+                </div>
+                <div class="detail-field">
+                  <label>Device Type</label>
+                  <input id="dDevice" value="${esc(lead.device_type || "")}" />
+                </div>
+                <div class="detail-field">
+                  <label>Stage</label>
+                  <select id="dStage">
+                    ${STAGES.map((s) => `<option value="${s.key}" ${s.key === lead.stage ? "selected" : ""}>${s.label}</option>`).join("")}
+                  </select>
+                </div>
+                <div class="detail-field">
+                  <label>Priority</label>
+                  <select id="dPriority">
+                    <option value="low" ${lead.priority === "low" ? "selected" : ""}>Low</option>
+                    <option value="medium" ${lead.priority === "medium" ? "selected" : ""}>Medium</option>
+                    <option value="high" ${lead.priority === "high" ? "selected" : ""}>High</option>
+                  </select>
+                </div>
+                <div class="detail-field">
+                  <label>Estimated Value ($)</label>
+                  <input id="dValue" type="number" value="${lead.estimated_value || ""}" />
+                </div>
+                <div class="detail-field">
+                  <label>Next Follow-up</label>
+                  <input id="dFollowup" type="date" value="${lead.next_follow_up || ""}" />
+                </div>
+                <div class="detail-field">
+                  <label>Assigned AE</label>
+                  <input id="dAE" value="${esc(lead.assigned_ae || "")}" />
+                </div>
+                <div class="detail-field">
+                  <label>Source</label>
+                  <input id="dSource" value="${esc(lead.source || "website")}" />
+                </div>
+                <div class="detail-field full">
+                  <label>Message / Notes</label>
+                  <textarea id="dMessage">${esc(lead.message || "")}</textarea>
+                </div>
+                ${
+                  lead.stage === "lost"
+                    ? `<div class="detail-field full">
+                  <label>Lost Reason</label>
+                  <textarea id="dLostReason">${esc(lead.lost_reason || "")}</textarea>
+                </div>`
+                    : ""
+                }
+              </div>
+            </div>
+
+            <div class="detail-section">
+              <h3>Activity Log</h3>
+              <div class="add-activity">
+                <div class="row">
+                  <select id="actType">
+                    <option value="note">📝 Note</option>
+                    <option value="email_sent">📤 Email Sent</option>
+                    <option value="email_received">📥 Email Received</option>
+                    <option value="call">📞 Call</option>
+                    <option value="meeting">🤝 Meeting</option>
+                  </select>
+                  <input id="actSummary" placeholder="Summary..." />
+                  <button class="btn btn-primary btn-sm" id="addActivityBtn">Add</button>
+                </div>
+              </div>
+              <div class="timeline" id="timeline">
+                ${activities
+                  .map(
+                    (a) => `
+                  <div class="timeline-item">
+                    <div class="timeline-icon ${a.type}">${ACTIVITY_ICONS[a.type] || "📝"}</div>
+                    <div class="timeline-body">
+                      <div class="tl-summary">${esc(a.summary)}</div>
+                      ${a.detail ? `<div class="tl-detail">${esc(a.detail)}</div>` : ""}
+                      <div class="tl-time">${formatDateTime(a.created_at)}${a.created_by ? " · " + esc(a.created_by) : ""}</div>
+                    </div>
+                  </div>
+                `,
+                  )
+                  .join("")}
+                ${activities.length === 0 ? `<div style="padding:16px;color:var(--text-muted);font-size:0.85rem">No activity yet</div>` : ""}
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Wire events
+        $("#saveLeadBtn").addEventListener("click", saveLead);
+        $("#deleteLeadBtn").addEventListener("click", deleteLead);
+        $("#addActivityBtn").addEventListener("click", addActivity);
+      }
+
+      async function saveLead() {
+        const lead = leads.find((l) => l.id === selectedId);
+        const oldStage = lead.stage;
+        const newStage = $("#dStage").value;
+
+        const updates = {
+          name: $("#dName").value.trim(),
+          email: $("#dEmail").value.trim(),
+          company: $("#dCompany").value.trim(),
+          device_type: $("#dDevice").value.trim(),
+          stage: newStage,
+          priority: $("#dPriority").value,
+          estimated_value: $("#dValue").value
+            ? parseFloat($("#dValue").value)
+            : null,
+          next_follow_up: $("#dFollowup").value || null,
+          assigned_ae: $("#dAE").value.trim(),
+          source: $("#dSource").value.trim(),
+          message: $("#dMessage").value.trim(),
+          lost_reason: $("#dLostReason")?.value?.trim() || lead.lost_reason,
+        };
+
+        const { error } = await sb
+          .from("leads")
+          .update(updates)
+          .eq("id", selectedId);
+        if (error) {
+          alert("Save failed: " + error.message);
+          return;
+        }
+
+        // Log stage change
+        if (oldStage !== newStage) {
+          await sb.from("lead_activities").insert({
+            lead_id: selectedId,
+            type: "stage_change",
+            summary: `Stage: ${stageLabel(oldStage)} → ${stageLabel(newStage)}`,
+          });
+        }
+
+        await loadLeads();
+        await loadActivities(selectedId);
+        renderDetail();
+      }
+
+      async function deleteLead() {
+        if (!confirm("Delete this lead and all its activities?")) return;
+        await sb.from("leads").delete().eq("id", selectedId);
+        selectedId = null;
+        await loadLeads();
+        renderMain();
+      }
+
+      async function addActivity() {
+        const type = $("#actType").value;
+        const summary = $("#actSummary").value.trim();
+        if (!summary) return;
+
+        const { error } = await sb.from("lead_activities").insert({
+          lead_id: selectedId,
+          type,
+          summary,
+        });
+        if (error) {
+          alert("Failed: " + error.message);
+          return;
+        }
+
+        await loadActivities(selectedId);
+        renderDetail();
+      }
+
+      // ── Kanban view ───────────────────────────────
+      function renderKanban() {
+        const filtered = getFiltered();
+        const panel = $("#mainPanel");
+        const activeStages = STAGES.filter((s) => s.key !== "lost");
+
+        panel.innerHTML = `<div class="kanban">
+          ${activeStages
+            .map((s) => {
+              const stageLds = filtered.filter((l) => l.stage === s.key);
+              return `<div class="kanban-col">
+              <div class="kanban-header">
+                <span>${s.label}</span>
+                <span class="count">${stageLds.length}</span>
+              </div>
+              <div class="kanban-cards" data-stage="${s.key}">
+                ${stageLds
+                  .map((l) => {
+                    const today = new Date().toISOString().slice(0, 10);
+                    const overdue =
+                      l.next_follow_up && l.next_follow_up < today;
+                    return `<div class="kanban-card" data-id="${l.id}">
+                    <div class="kc-name">${esc(l.name)}</div>
+                    <div class="kc-company">${esc(l.company || "")}</div>
+                    <div class="kc-meta">
+                      <span class="stage-badge stage-${l.priority}" style="font-size:0.65rem">${l.priority}</span>
+                      ${l.next_follow_up ? `<span class="kc-followup ${overdue ? "overdue" : ""}">📅 ${formatDate(l.next_follow_up)}</span>` : ""}
+                    </div>
+                    ${l.estimated_value ? `<div style="font-size:0.8rem;color:var(--success);margin-top:4px">$${Number(l.estimated_value).toLocaleString()}</div>` : ""}
+                  </div>`;
+                  })
+                  .join("")}
+              </div>
+            </div>`;
+            })
+            .join("")}
+        </div>`;
+
+        // Click to select
+        panel.querySelectorAll(".kanban-card").forEach((el) => {
+          el.addEventListener("click", () => selectLead(el.dataset.id));
+        });
+      }
+
+      // ── Metrics view ──────────────────────────────
+      function renderMetrics() {
+        const panel = $("#mainPanel");
+        const pipeline = leads.filter(
+          (l) => !["won", "lost"].includes(l.stage),
+        );
+        const won = leads.filter((l) => l.stage === "won");
+        const lost = leads.filter((l) => l.stage === "lost");
+        const total = leads.length;
+        const conversionRate =
+          total > 0 ? ((won.length / total) * 100).toFixed(1) : "0.0";
+        const totalValue = won.reduce(
+          (s, l) => s + (l.estimated_value || 0),
+          0,
+        );
+        const pipelineValue = pipeline.reduce(
+          (s, l) => s + (l.estimated_value || 0),
+          0,
+        );
+        const today = new Date().toISOString().slice(0, 10);
+        const overdue = leads.filter(
+          (l) =>
+            l.next_follow_up &&
+            l.next_follow_up < today &&
+            !["won", "lost"].includes(l.stage),
+        );
+
+        // Leads by stage
+        const byStage = STAGES.map((s) => ({
+          label: s.label,
+          count: leads.filter((l) => l.stage === s.key).length,
+          key: s.key,
+        }));
+
+        panel.innerHTML = `
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-val">${total}</div>
+              <div class="metric-label">Total Leads</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val">${pipeline.length}</div>
+              <div class="metric-label">Active Pipeline</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val" style="color:var(--success)">${won.length}</div>
+              <div class="metric-label">Won</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val" style="color:var(--danger)">${lost.length}</div>
+              <div class="metric-label">Lost</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val">${conversionRate}%</div>
+              <div class="metric-label">Win Rate</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val" style="color:var(--success)">$${Number(totalValue).toLocaleString()}</div>
+              <div class="metric-label">Won Revenue</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val" style="color:var(--accent)">$${Number(pipelineValue).toLocaleString()}</div>
+              <div class="metric-label">Pipeline Value</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-val" style="color:${overdue.length > 0 ? "var(--danger)" : "var(--text)"}">${overdue.length}</div>
+              <div class="metric-label">Overdue Follow-ups</div>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h3>Pipeline by Stage</h3>
+            ${byStage
+              .map(
+                (s) => `
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                <span style="width:140px;font-size:0.85rem">${s.label}</span>
+                <div style="flex:1;background:var(--surface);border-radius:4px;height:24px;overflow:hidden">
+                  <div style="width:${total > 0 ? (s.count / total) * 100 : 0}%;background:var(--accent);height:100%;border-radius:4px;min-width:${s.count > 0 ? "2px" : "0"}"></div>
+                </div>
+                <span style="width:30px;text-align:right;font-size:0.85rem;font-weight:600">${s.count}</span>
+              </div>
+            `,
+              )
+              .join("")}
+          </div>
+        `;
+      }
+
+      // ── New lead modal ────────────────────────────
+      $("#newLeadBtn").addEventListener("click", showNewLeadModal);
+
+      function showNewLeadModal() {
+        const overlay = document.createElement("div");
+        overlay.className = "modal-overlay";
+        overlay.id = "newLeadModal";
+        overlay.innerHTML = `
+          <div class="modal">
+            <h2>New Lead</h2>
+            <div class="field"><label>Name *</label><input id="nlName" /></div>
+            <div class="field"><label>Email</label><input id="nlEmail" type="email" /></div>
+            <div class="field"><label>Company</label><input id="nlCompany" /></div>
+            <div class="field"><label>Device Type</label><input id="nlDevice" placeholder="e.g., respiratory, cardiovascular" /></div>
+            <div class="field"><label>Source</label>
+              <select id="nlSource">
+                <option value="website">Website Form</option>
+                <option value="referral">Referral</option>
+                <option value="cold_outreach">Cold Outreach</option>
+                <option value="conference">Conference</option>
+                <option value="linkedin">LinkedIn</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="field"><label>Priority</label>
+              <select id="nlPriority">
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div class="field"><label>Estimated Value ($)</label><input id="nlValue" type="number" /></div>
+            <div class="field"><label>Message / Notes</label><textarea id="nlMessage"></textarea></div>
+            <div class="btn-group">
+              <button class="btn btn-outline" id="nlCancel">Cancel</button>
+              <button class="btn btn-primary" id="nlSave">Create Lead</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) overlay.remove();
+        });
+        $("#nlCancel").addEventListener("click", () => overlay.remove());
+        $("#nlSave").addEventListener("click", async () => {
+          const name = $("#nlName").value.trim();
+          if (!name) {
+            alert("Name is required");
+            return;
+          }
+
+          const { data, error } = await sb
+            .from("leads")
+            .insert({
+              name,
+              email: $("#nlEmail").value.trim() || null,
+              company: $("#nlCompany").value.trim() || null,
+              device_type: $("#nlDevice").value.trim() || null,
+              source: $("#nlSource").value,
+              priority: $("#nlPriority").value,
+              estimated_value: $("#nlValue").value
+                ? parseFloat($("#nlValue").value)
+                : null,
+              message: $("#nlMessage").value.trim() || null,
+            })
+            .select()
+            .single();
+
+          if (error) {
+            alert("Failed: " + error.message);
+            return;
+          }
+          overlay.remove();
+          await loadLeads();
+          selectLead(data.id);
+        });
+      }
+
+      // ── Utilities ─────────────────────────────────
+      function stageLabel(key) {
+        return STAGES.find((s) => s.key === key)?.label || key;
+      }
+      function formatDate(d) {
+        if (!d) return "";
+        return new Date(d + "T00:00:00").toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        });
+      }
+      function formatDateTime(dt) {
+        if (!dt) return "";
+        return new Date(dt).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+        });
+      }
+
+      // ── Boot ──────────────────────────────────────
+      checkSession();
+    </script>
+  </body>
+</html>
