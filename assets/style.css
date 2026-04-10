@@ -114,7 +114,9 @@ h3 {
   font-size: 1.1rem;
 }
 .logo-icon {
-  font-size: 1.4rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }
 .logo-sub {
   display: block;
