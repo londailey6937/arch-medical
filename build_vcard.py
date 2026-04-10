@@ -18,7 +18,6 @@ vcf_lines = [
     'VERSION:3.0',
     'N:;510k Bridge;;;',
     'FN:510k Bridge',
-    'ORG:Pilot Software LLC dba 510k Bridge',
     'TITLE:FDA 510(k) Medical Device Consulting',
     'ADR;TYPE=WORK:;;Gresham;Oregon;;USA',
     'EMAIL;TYPE=WORK:info@510kbridge.com',

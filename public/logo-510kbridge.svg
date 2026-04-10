@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f2035;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bridgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38bdf8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="archGrad" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#67e8f9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="200" cy="200" r="195" fill="url(#bgGrad)" stroke="#1e3a5f" stroke-width="3"/>
+
+  <!-- Bridge arch -->
+  <path d="M 80 210 Q 140 110 200 100 Q 260 110 320 210"
+        fill="none" stroke="url(#archGrad)" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Bridge deck -->
+  <line x1="60" y1="210" x2="340" y2="210" stroke="url(#bridgeGrad)" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Bridge pillars -->
+  <line x1="120" y1="210" x2="120" y2="240" stroke="#0ea5e9" stroke-width="5" stroke-linecap="round"/>
+  <line x1="200" y1="210" x2="200" y2="240" stroke="#0ea5e9" stroke-width="5" stroke-linecap="round"/>
+  <line x1="280" y1="210" x2="280" y2="240" stroke="#0ea5e9" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Bridge cables from arch -->
+  <line x1="120" y1="165" x2="120" y2="210" stroke="#0ea5e9" stroke-width="2" opacity="0.6"/>
+  <line x1="150" y1="140" x2="150" y2="210" stroke="#0ea5e9" stroke-width="2" opacity="0.6"/>
+  <line x1="180" y1="120" x2="180" y2="210" stroke="#0ea5e9" stroke-width="2" opacity="0.6"/>
+  <line x1="200" y1="112" x2="200" y2="210" stroke="#0ea5e9" stroke-width="2" opacity="0.6"/>
+  <line x1="220" y1="120" x2="220" y2="210" stroke="#0ea5e9" stroke-width="2" opacity="0.6"/>
+  <line x1="250" y1="140" x2="250" y2="210" stroke="#0ea5e9" stroke-width="2" opacity="0.6"/>
+  <line x1="280" y1="165" x2="280" y2="210" stroke="#0ea5e9" stroke-width="2" opacity="0.6"/>
+
+  <!-- Text: 510k -->
+  <text x="200" y="285" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-size="48" font-weight="700" fill="#ffffff" letter-spacing="3">510k</text>
+
+  <!-- Text: BRIDGE -->
+  <text x="200" y="318" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="400" fill="#38bdf8" letter-spacing="8">BRIDGE</text>
+</svg>
